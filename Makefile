@@ -12,7 +12,6 @@ TEST_EXE				= run_test
 CC						= gcc
 CFLAGS					= -Wall -Werror -Wextra -O3
 RM						= rm -f
-AR						= ar rcs
 
 # Colors
 
@@ -26,7 +25,7 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-CHECKER_SRC_FILES	=
+CHECKER_SRC_FILES	= checker
 PUSHSWAP_SRC_FILES	=
 TEST_FILES	=	*
 
