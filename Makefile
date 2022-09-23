@@ -1,9 +1,9 @@
-
 #Variables
 
-CHECKER_EXECUTABLE		= checker
-PUSH_SWAP_EXECUTABLE	= push_swap
+CHECKER					= checker
+PUSH_SWAP				= push_swap
 INCLUDE					= -I include
+LIBFT_LIB				= -L ./libft -lft
 LIBFT					= libft
 SRC_DIR					= src/
 OBJ_DIR					= src/
@@ -40,8 +40,7 @@ all:			$(CHECKER) $(PUSH_SWAP)
 $(CHECKER):		$(CHECKER_OBJ)
 				@make -C $(LIBFT)
 				@cp libft/libft.a .
-				@mv libft.a $(CHECKER)
-				@make -C $(CHECKER) $(CHECKER_OBJ)
+				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
 				@echo "$(GREEN)checker compiled!$(DEF_COLOR)"
 
 $(PUSHSWAP):	$(PUSHSWAP_OBJ)
@@ -52,26 +51,26 @@ $(PUSHSWAP):	$(PUSHSWAP_OBJ)
 				@echo "$(GREEN)push_swap compiled!$(DEF_COLOR)"
 
 clean:
-			@$(RM) -rf $(PUSHSWAP_OBJ)
-			@echo "$(BLUE) push_swap object files cleaned!$(DEF_COLOR)"
-			@$(RM) -rf $(CHECKER_OBJ)
-			@echo "$(BLUE) checker object files cleaned!$(DEF_COLOR)"
-			@make clean -C $(LIBFT)
-			@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
+				@$(RM) -rf $(PUSHSWAP_OBJ)
+				@echo "$(BLUE) push_swap object files cleaned!$(DEF_COLOR)"
+				@$(RM) -rf $(CHECKER_OBJ)
+				@echo "$(BLUE) checker object files cleaned!$(DEF_COLOR)"
+				@make clean -C $(LIBFT)
+				@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
 
-fclean:		clean
-			@$(RM) -f $(CHECKER)
-			@echo "$(CYAN)checker binary files cleaned!$(DEF_COLOR)"
-			@$(RM) -f $(PUSH_SWAP)
-			@echo "$(CYAN)push_swap binary files cleaned!$(DEF_COLOR)"
-			@$(RM) -f $(LIBFT)/libft.a
-			@echo "$(CYAN)libft binary files cleaned!$(DEF_COLOR)"
+fclean:			clean
+				@$(RM) -f $(CHECKER)
+				@echo "$(CYAN)checker binary files cleaned!$(DEF_COLOR)"
+				@$(RM) -f $(PUSH_SWAP)
+				@echo "$(CYAN)push_swap binary files cleaned!$(DEF_COLOR)"
+				@$(RM) -f $(LIBFT)/libft.a
+				@echo "$(CYAN)libft binary files cleaned!$(DEF_COLOR)"
 
-re:			fclean all
-			@echo "$(GREEN)Rebuilt ft_printf!$(DEF_COLOR)"
+re:				fclean all
+				@echo "$(GREEN)Rebuilt all!$(DEF_COLOR)"
 
-test:		re
-			${CC} -L . -l ${LIBFT} -o ${TEST_EXE} -fsanitize=address -g
-			./${TEST_EXE}
+test:			re
+				${CC} -L . -l ${LIBFT} -o ${TEST_EXE} -fsanitize=address -g
+				./${TEST_EXE}
 			
-.PHONY:		all clean fclean re
+.PHONY:			all clean fclean re
