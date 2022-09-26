@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:53:36 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/03/25 23:20:51 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/09/26 13:07:37 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int		ft_isalpha(int arg);
 int		ft_isalnum(int arg);
 int		ft_isascii(int arg);
 int		ft_isprint(int arg);
+int		ft_iswhitespace(int arg);
 int		ft_toupper(int arg);
 int		ft_tolower(int arg);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);

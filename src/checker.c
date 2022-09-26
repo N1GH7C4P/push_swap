@@ -6,70 +6,75 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:07:19 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/23 12:54:23 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:14:46 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 #include "../libft/libft.h"
 
-int	check_argument(char *input)
+static int	check_argument(char *input)
 {
 	size_t	i;
 
 	i = 0;
 	while (input[i])
 	{
-		if(input[i] < '0' || input[i] > 9)
-			return (0);
+		if(input[i] < '0' || input[i] > '9')
+			return (-1);
 		i++;
 	}
 	return (1);
 }
 
-int find_smallest_nb_index(int stack[max_args], size_t stack_size)
+static int	parse_input_string(char *input, int stack[MAX_STACK])
 {
-	size_t		i;
-	int			smallest;
-	int			index_smallest;
+	int	i;
+	int	nb_count;
+	int nb;
 
-	smallest = 2147483647;
 	i = 0;
-	while (i < stack_size)
+	nb_count = 0;
+	while (input[i])
 	{
-		if (stack[i] <= smallest)
-		{
-			smallest = stack[i];
-			index_smallest = i;
-		}
-		i++;
+		while (ft_iswhitespace(input[i]))
+			i++;
+		if (!ft_isdigit(input[i]))
+			return (-1);
+		nb = ft_atoi(input + i);
+		stack[++nb_count - 1] = nb;
+		i += ft_countdigits(nb, 10);
 	}
-	return (index_smallest);
+	return (nb_count);
 }
 
-void print_stack()
+int parse_arguments(char **argv, int stack[MAX_STACK])
 {
+	int stack_size;
 
+	stack_size = 0;
+	while (argv[stack_size + 1])
+	{
+		if (check_argument(argv[stack_size + 1]) == -1)
+			return (-1);
+		else
+			stack[stack_size] = ft_atoi(argv[stack_size + 1]);
+		stack_size++;
+	}
+	return (stack_size);
 }
 
-int check_stack(int stack[max_args], size_t stack_size)
+static int check_stack(int stack[MAX_STACK], int stack_size)
 {
-	size_t	i;
-	int		prev;
+	int	i;
+	int	prev;
 
+	if (stack_size < 0)
+		return -1;
 	prev = -2147483648;
 	i = 0;
 	while (i < stack_size)
 	{
-		ft_putstr("i: ");
-		ft_putnbr(i);
-		ft_putendl("");
-		ft_putstr("prev: ");
-		ft_putnbr(prev);
-		ft_putendl("");
-		ft_putstr("stack[i]: ");
-		ft_putnbr(stack[i]);
-		ft_putendl("");
 		if (stack[i] < prev)
 			return (-1);
 		else
@@ -79,26 +84,43 @@ int check_stack(int stack[max_args], size_t stack_size)
 	return (1);
 }
 
+static void exit_program(int error)
+{
+	if (error)
+	{
+		ft_putendl("Error");
+		exit(-1);
+	}
+	exit(0);
+}
+
 int	main(int argc, char **argv)
 {
-	static int	stack[max_args];
-	size_t		i;
-
-	i = 0;
-	while (argv[i])
-	{
-		if (check_argument(argv[i]) == -1)
-		{
-			ft_putendl("Error");
-			return (-1);
-		}
-		else
-			stack[i] = ft_atoi(argv[1]);
-		i++;
-	}
-	if (check_stack(stack, i) == -1)
-		ft_putendl("KO");
+	static int	stacks[2][MAX_STACK];
+	int			stack_sizes[2];
+	char		*line;
+	int			ret;
+	
+	line = NULL;
+	if (argc > MAX_ARGS - 1)
+		exit_program(1);
+	if (argc == 2)
+		stack_sizes[0] = parse_input_string(argv[1], stacks[0]);
 	else
-		ft_putendl("OK");
-	return (argc);
+		stack_sizes[0] = parse_arguments(argv, stacks[0]);
+	if (stack_sizes[0] < 0)
+		exit_program(1);
+	else
+	{
+		ret = ft_get_next_line(0, &line);
+		if (ret)
+			run_command(stacks[0], stack_sizes[0], line);
+		print_stack(stacks[0], stack_sizes[0]);
+		if (check_stack(stacks[0], stack_sizes[0]) == -1)
+			ft_putendl("KO");
+		else
+			ft_putendl("OK");
+	}
+	free(line);
+	exit_program(0);
 }

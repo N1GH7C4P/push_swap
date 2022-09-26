@@ -25,7 +25,7 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-CHECKER_SRC_FILES	= checker
+CHECKER_SRC_FILES	= checker utils commands
 PUSHSWAP_SRC_FILES	=
 TEST_FILES	=	*
 
