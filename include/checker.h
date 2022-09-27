@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:28:41 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/26 15:28:11 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:05:50 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,24 @@
 # define MAX_STACK 2000
 # include <unistd.h>
 # include <stdio.h>
-//# include <stdlib.h>
+
+// Parser
+int		parser(int argc, char **argv, int stacks[2][MAX_STACK], int	stack_sizes[2]);
+int		parse_input_string(char *input, int stack[MAX_STACK]);
+int		parse_arguments(char **argv, int stack[MAX_STACK], int stack_size);
 
 // Utils
-int		find_smallest_nb_index(int stack[MAX_STACK], size_t stack_sizes[2]);
-void	print_stack(int stack[MAX_STACK], size_t stack_size);
+void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[2]);
+void	exit_program(int error);
+void	rev_stack(int stack[MAX_STACK], int stack_size);
+int		check_stacks(int stacks[2][MAX_STACK], int stack_sizes[2]);
 
 //  Swap commands
 void	run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line);
 void	swap_top (int stack[MAX_STACK], int stack_size);
+void	push_swap(int stacks[2][MAX_STACK], int stack_sizes[2], int direction);
+void	swap_top (int stack[MAX_STACK], int stack_size);
+void	rotate(int stack[MAX_STACK], int stack_size);
+void	rev_rotate(int stack[MAX_STACK], int stack_size);
 
 #endif
