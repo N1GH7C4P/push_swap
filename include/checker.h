@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:28:41 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/27 16:05:50 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:45:26 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	rev_stack(int stack[MAX_STACK], int stack_size);
 int		check_stacks(int stacks[2][MAX_STACK], int stack_sizes[2]);
 
 //  Swap commands
-void	run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line);
+void	run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line, int verbose);
 void	swap_top (int stack[MAX_STACK], int stack_size);
 void	push_swap(int stacks[2][MAX_STACK], int stack_sizes[2], int direction);
 void	swap_top (int stack[MAX_STACK], int stack_size);

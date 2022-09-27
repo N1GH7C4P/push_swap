@@ -1,7 +1,7 @@
 #Variables
 
 CHECKER					= checker
-PUSH_SWAP				= push_swap
+PUSHSWAP				= push_swap
 INCLUDE					= -I include
 LIBFT_LIB				= -L ./libft -lft
 LIBFT					= libft
@@ -26,11 +26,11 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 
 CHECKER_SRC_FILES	= checker utils commands parser
-PUSHSWAP_SRC_FILES	= push_swap parser
+PUSHSWAP_SRC_FILES	= push_swap parser utils commands
 TEST_FILES	=	*
 
 CHECKER_SRC 	= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(CHECKER_SRC_FILES)))
-PUSH_SWAP_SRC 	= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(PUSHSWAP_SRC_FILES)))
+PUSHSWAP_SRC 	= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(PUSHSWAP_SRC_FILES)))
 CHECKER_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(CHECKER_SRC_FILES)))
 PUSHSWAP_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(PUSHSWAP_SRC_FILES)))
 TEST 			= 	$(addprefix $(TEST_DIR), $(addsuffix .test.c, $(TEST_FILES)))
@@ -46,8 +46,7 @@ $(CHECKER):		$(CHECKER_OBJ)
 $(PUSHSWAP):	$(PUSHSWAP_OBJ)
 				@make -C $(LIBFT)
 				@cp libft/libft.a .
-				@mv libft.a $(PUSHSWAP)
-				@make -C $(PUSHSWAP) $(PUSHSWAP_OBJ)
+				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(PUSHSWAP_SRC) -o $(PUSHSWAP)
 				@echo "$(GREEN)push_swap compiled!$(DEF_COLOR)"
 
 clean:

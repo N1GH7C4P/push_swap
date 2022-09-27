@@ -6,15 +6,17 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/27 15:39:14 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:57:49 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 #include "../libft/libft.h"
 
-void run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line)
+void run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line, int verbose)
 {
+	if (verbose)
+		ft_putendl(line);
 	if (!ft_strcmp(line, "sa"))
 		swap_top(stacks[0], stack_sizes[0]);
 	else if(!ft_strcmp(line, "sb"))
@@ -48,9 +50,11 @@ void run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line)
 	}
 	else
 		exit_program(1);
+	print_stacks(stacks, stack_sizes);
 }
 
 // pa & pb
+// push <dest> - take the first element at the top of <src> and put it at the top of <dest>.
 void push_swap(int stacks[2][MAX_STACK], int stack_sizes[2], int direction)
 {
 	if (direction == 1)
@@ -74,6 +78,7 @@ void push_swap(int stacks[2][MAX_STACK], int stack_sizes[2], int direction)
 }
 
 // sa & sb & ss
+// swap <stack> - swap the first 2 elements at the top of <stack>.
 void swap_top (int stack[MAX_STACK], int stack_size)
 {
 	if (stack_size < 2)
@@ -82,6 +87,7 @@ void swap_top (int stack[MAX_STACK], int stack_size)
 }
 
 // ra & rb & rr
+// rotate <stack> - shift up all elements of <stack> a by 1. The first element becomes the last one.
 void rotate(int stack[MAX_STACK], int stack_size)
 {
 	int	temp;
@@ -100,6 +106,7 @@ void rotate(int stack[MAX_STACK], int stack_size)
 }
 
 //rra & rrb & rrr
+// reverse rotate <stack> - shift down all elements of <stack> a by 1. The last element becomes the first one.
 void rev_rotate(int stack[MAX_STACK], int stack_size)
 {
 	int	temp;

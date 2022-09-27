@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/27 15:53:43 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:08:01 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,6 @@ int check_stacks(int stacks[2][MAX_STACK], int stack_sizes[2])
 	return (1);
 }
 
-int find_smallest_nb_index(int stack[MAX_STACK], size_t stack_size)
-{
-	size_t		i;
-	int			smallest;
-	int			index_smallest;
-
-	smallest = 2147483647;
-	i = 0;
-	while (i < stack_size)
-	{
-		if (stack[i] <= smallest)
-		{
-			smallest = stack[i];
-			index_smallest = i;
-		}
-		i++;
-	}
-	return (index_smallest);
-}
-
 void print_stacks(int stacks[2][MAX_STACK], int stack_sizes[2])
 {
 	size_t	i;
@@ -63,7 +43,8 @@ void print_stacks(int stacks[2][MAX_STACK], int stack_sizes[2])
 	else
 		bigger_stack_size = stack_sizes[1];
 	i = bigger_stack_size;
-	while(i > 0)
+	ft_putendl("-----");
+	while (i > 0)
 	{
 		i--;
 		ft_putnbr(stacks[0][i]);
