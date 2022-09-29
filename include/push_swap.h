@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:29:45 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/29 12:34:27 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:56:05 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	return_all_to_stack_a(int stacks[2][MAX_STACK], int stack_sizes[2]);
 void	radix_sort(int	stacks[2][MAX_STACK], int stack_sizes[2]);
 
 // Utils
+void	copy_stack(int	src[MAX_STACK], int	dest[MAX_STACK], int stack_size);
 void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[2]);
+void	rank_stack(int	stack[MAX_STACK], int stack_size);
+int		count_smaller_numbers(int stack[MAX_STACK], int stack_size, int nb);
 
 // Parser
 int		parser(int argc, char **argv, int stacks[2][MAX_STACK], int	stack_sizes[2]);

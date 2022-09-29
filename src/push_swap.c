@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:49:07 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/29 16:19:47 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:56:34 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 	static int	stack_sizes[2];
 
 	parser(argc, argv, stacks, stack_sizes);
+	rank_stack(stacks[0], stack_sizes[0]);
 	radix_sort(stacks, stack_sizes);
 	print_stacks(stacks, stack_sizes);
 }
@@ -50,12 +51,49 @@ void move_to_top(int stacks[2][MAX_STACK], int stack_sizes[2], int index, int st
 	}
 }
 
+int count_smaller_numbers(int stack[MAX_STACK], int stack_size, int nb)
+{
+	int orig_size;
+	int smaller;
+
+	orig_size = stack_size;
+	smaller = 0;
+	while (orig_size--)
+	{
+		if (stack[orig_size] < nb)
+			smaller++;
+	}
+	return (smaller);
+}
+
+void copy_stack(int	src[MAX_STACK], int	dest[MAX_STACK], int stack_size)
+{
+	int orig_size = stack_size;
+	while (orig_size--)
+		dest[orig_size] = src[orig_size];
+}
+
+void rank_stack(int	stack[MAX_STACK], int stack_size)
+{
+	int	ranked[MAX_STACK];
+	int orig_stack_size;
+	int smaller;
+
+	orig_stack_size = stack_size;
+	while (orig_stack_size--)
+	{
+		smaller = count_smaller_numbers(stack, stack_size, stack[orig_stack_size]);
+		ranked[orig_stack_size] = smaller; 
+	}
+	copy_stack(ranked, stack, stack_size);
+}
+
 void radix_sort(int	stacks[2][MAX_STACK], int stack_sizes[2])
 {
 	int nb_of_bits;
 	int bit;
 
-	nb_of_bits = 16;
+	nb_of_bits = 32;
 	bit = 1;
 	while (bit <= nb_of_bits)
 	{
