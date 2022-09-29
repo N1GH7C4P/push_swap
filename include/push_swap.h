@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 11:29:45 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/27 17:50:14 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/29 12:34:27 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # define MAX_STACK 2000
 # include <unistd.h>
 # include <stdio.h>
+
+// Sorter
+void	split_stack_by_bit(int	stacks[2][MAX_STACK], int stack_sizes[2], int bit);
+void	return_all_to_stack_a(int stacks[2][MAX_STACK], int stack_sizes[2]);
+void	radix_sort(int	stacks[2][MAX_STACK], int stack_sizes[2]);
 
 // Utils
 void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[2]);

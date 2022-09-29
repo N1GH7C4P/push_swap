@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/27 17:57:49 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/29 12:39:55 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line, int v
 	}
 	else
 		exit_program(1);
-	print_stacks(stacks, stack_sizes);
+	//print_stacks(stacks, stack_sizes);
 }
 
 // pa & pb
