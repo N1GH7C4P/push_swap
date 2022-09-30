@@ -6,29 +6,42 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/27 18:08:01 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:09:26 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 #include "../libft/libft.h"
 
-int check_stacks(int stacks[2][MAX_STACK], int stack_sizes[2])
+int check_stacks(int stacks[2][MAX_STACK], int stack_sizes[2], int verbose)
 {
 	int	i;
 	int	prev;
 
 	if (stack_sizes[0] < 0 || stack_sizes[1] > 0)
-		return -1;
-	prev = -2147483648;
-	i =  stack_sizes[0];
-	while (i >= 0)
 	{
-		if (stacks[0][i] < prev)
+		if (verbose)
+			ft_putendl("Invalid stack sizes");
+		return -1;
+	}
+	prev = INT_MAX;
+	i =  0;
+	while (i < stack_sizes[0])
+	{
+		if (stacks[0][i] > prev)
+		{
+			if (verbose)
+			{
+				ft_putnbr(stacks[0][i]);
+				ft_putstr(" > ");
+				ft_putnbr(prev);
+				ft_putendl("");
+			}
 			return (-1);
+		}
 		else
 			prev = stacks[0][i];
-		i--;
+		i++;
 	}
 	return (1);
 }
@@ -42,15 +55,15 @@ void print_stacks(int stacks[2][MAX_STACK], int stack_sizes[2])
 		bigger_stack_size = stack_sizes[0];
 	else
 		bigger_stack_size = stack_sizes[1];
-	i = bigger_stack_size;
+	i = 0;
 	ft_putendl("-----");
-	while (i > 0)
+	while (i < bigger_stack_size)
 	{
-		i--;
 		ft_putnbr(stacks[0][i]);
 		ft_putstr(" | ");
 		ft_putnbr(stacks[1][i]);
 		ft_putendl("");
+		i++;
 	}
 	ft_putendl("-----");
 	ft_putnbr(stack_sizes[0]);

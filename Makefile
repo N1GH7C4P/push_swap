@@ -35,7 +35,7 @@ CHECKER_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(CHECKER_SRC_FILES)))
 PUSHSWAP_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(PUSHSWAP_SRC_FILES)))
 TEST 			= 	$(addprefix $(TEST_DIR), $(addsuffix .test.c, $(TEST_FILES)))
 
-all:			$(CHECKER) $(PUSH_SWAP)
+all:			$(CHECKER) $(PUSHSWAP)
 
 $(CHECKER):		$(CHECKER_OBJ)
 				@make -C $(LIBFT)
@@ -60,16 +60,16 @@ clean:
 fclean:			clean
 				@$(RM) -f $(CHECKER)
 				@echo "$(CYAN)checker binary files cleaned!$(DEF_COLOR)"
-				@$(RM) -f $(PUSH_SWAP)
+				@$(RM) -f $(PUSHSWAP)
 				@echo "$(CYAN)push_swap binary files cleaned!$(DEF_COLOR)"
-				@$(RM) -f $(LIBFT)/libft.a
+				@$(RM) -f libft.a
 				@echo "$(CYAN)libft binary files cleaned!$(DEF_COLOR)"
 
 re:				fclean all
 				@echo "$(GREEN)Rebuilt all!$(DEF_COLOR)"
 
-test:			re
-				${CC} -L . -l ${LIBFT} -o ${TEST_EXE} -fsanitize=address -g
-				./${TEST_EXE}
+visualize:		re
+				@cp ./push_swap ../push_swap_visualizer/build
+				../push_swap_visualizer/build/bin/visualizer
 			
 .PHONY:			all clean fclean re

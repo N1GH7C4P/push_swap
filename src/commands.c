@@ -6,14 +6,14 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/29 12:39:55 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:56:07 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 #include "../libft/libft.h"
 
-void run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line, int verbose)
+void run_command(int stacks[3][MAX_STACK], int stack_sizes[2], char *line, int verbose)
 {
 	if (verbose)
 		ft_putendl(line);
@@ -55,7 +55,7 @@ void run_command(int stacks[2][MAX_STACK], int stack_sizes[2], char *line, int v
 
 // pa & pb
 // push <dest> - take the first element at the top of <src> and put it at the top of <dest>.
-void push_swap(int stacks[2][MAX_STACK], int stack_sizes[2], int direction)
+void push_swap(int stacks[3][MAX_STACK], int stack_sizes[2], int direction)
 {
 	if (direction == 1)
 	{

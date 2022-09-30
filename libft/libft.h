@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:53:36 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/26 13:07:37 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/30 14:46:30 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 # define BUFF_SIZE 100
 # define FD_MAX 4096
+# define INT_MIN -2147483648
+# define INT_MAX 2147483647
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>

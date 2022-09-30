@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/27 16:08:03 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:54:40 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@ static int	check_argument(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if(input[i] < '0' || input[i] > '9')
-			return (-1);
+		if (!ft_isdigit(input[i]))
+		{
+			ft_putstr("Invalid digit: ");
+			ft_putchar(input[i]);
+			free(input);
+			exit_program(-1);
+		}
 		i++;
 	}
 	return (1);
 }
 
-int	parser(int argc, char **argv, int stacks[2][MAX_STACK], int	stack_sizes[2])
+int	parser(int argc, char **argv, int stack[MAX_STACK], int	stack_size)
 {
 	char		*line;
 
@@ -35,10 +40,10 @@ int	parser(int argc, char **argv, int stacks[2][MAX_STACK], int	stack_sizes[2])
 	if (argc > MAX_ARGS - 1)
 		exit_program(1);
 	if (argc == 2)
-		stack_sizes[0] = parse_input_string(argv[1], stacks[0]);
+		stack_size = parse_input_string(argv[1], stack);
 	else
-		stack_sizes[0] = parse_arguments(argv, stacks[0], argc - 1);
-	if (stack_sizes[0] < 0)
+		stack_size = parse_arguments(argv, stack, argc - 1);
+	if (stack_size < 0)
 		exit_program(1);
 	free(line);
 	return (0);
@@ -57,7 +62,11 @@ int	parse_input_string(char *input, int stack[MAX_STACK])
 		while (ft_iswhitespace(input[i]))
 			i++;
 		if (!ft_isdigit(input[i]))
-			return (-1);
+		{
+			ft_putstr("Invalid digit: ");
+			ft_putchar(input[i]);
+			exit_program(-1);
+		}
 		nb = ft_atoi(input + i);
 		stack[++nb_count - 1] = nb;
 		i += ft_countdigits(nb, 10);
