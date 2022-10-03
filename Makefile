@@ -2,8 +2,8 @@
 
 CHECKER					= checker
 PUSHSWAP				= push_swap
-INCLUDE					= -I include
-LIBFT_LIB				= -L ./libft -lft
+INCLUDE					= -I include/ -I libft/
+LIBFT_LIB				= -L libft -lft
 LIBFT					= libft
 SRC_DIR					= src/
 OBJ_DIR					= src/
@@ -40,13 +40,13 @@ all:			$(CHECKER) $(PUSHSWAP)
 $(CHECKER):		$(CHECKER_OBJ)
 				@make -C $(LIBFT)
 				@cp libft/libft.a .
-				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
+				${CC} $(CFLAGS) -o $(CHECKER) $(CHECKER_OBJ) $(LIBFT_LIB) $(INCLUDE)
 				@echo "$(GREEN)checker compiled!$(DEF_COLOR)"
 
 $(PUSHSWAP):	$(PUSHSWAP_OBJ)
 				@make -C $(LIBFT)
 				@cp libft/libft.a .
-				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(PUSHSWAP_SRC) -o $(PUSHSWAP)
+				${CC} $(CFLAGS) -o $(PUSHSWAP) $(PUSHSWAP_OBJ) $(LIBFT_LIB) $(INCLUDE) 
 				@echo "$(GREEN)push_swap compiled!$(DEF_COLOR)"
 
 clean:
@@ -62,7 +62,7 @@ fclean:			clean
 				@echo "$(CYAN)checker binary files cleaned!$(DEF_COLOR)"
 				@$(RM) -f $(PUSHSWAP)
 				@echo "$(CYAN)push_swap binary files cleaned!$(DEF_COLOR)"
-				@$(RM) -f libft.a
+				@make clean -C $(LIBFT)
 				@echo "$(CYAN)libft binary files cleaned!$(DEF_COLOR)"
 
 re:				fclean all

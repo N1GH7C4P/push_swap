@@ -13,7 +13,7 @@
 #include "../include/checker.h"
 #include "../libft/libft.h"
 
-int check_stacks(int stacks[2][MAX_STACK], int stack_sizes[2], int verbose)
+int check_stacks(int stacks[3][MAX_STACK], int stack_sizes[2], int verbose)
 {
 	int	i;
 	int	prev;
@@ -46,7 +46,7 @@ int check_stacks(int stacks[2][MAX_STACK], int stack_sizes[2], int verbose)
 	return (1);
 }
 
-void print_stacks(int stacks[2][MAX_STACK], int stack_sizes[2])
+void print_stacks(int stacks[3][MAX_STACK], int stack_sizes[2])
 {
 	size_t	i;
 	size_t	bigger_stack_size;
