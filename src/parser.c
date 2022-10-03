@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/30 20:54:40 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:05:46 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_argument(char *input)
 	return (1);
 }
 
-int	parser(int argc, char **argv, int stack[MAX_STACK], int	stack_size)
+int	parser(int argc, char **argv, int stacks[3][MAX_STACK], int	stack_sizes[2])
 {
 	char		*line;
 
@@ -40,10 +40,10 @@ int	parser(int argc, char **argv, int stack[MAX_STACK], int	stack_size)
 	if (argc > MAX_ARGS - 1)
 		exit_program(1);
 	if (argc == 2)
-		stack_size = parse_input_string(argv[1], stack);
+		stack_sizes[0] = parse_input_string(argv[1], stacks[0]);
 	else
-		stack_size = parse_arguments(argv, stack, argc - 1);
-	if (stack_size < 0)
+		stack_sizes[0] = parse_arguments(argv, stacks[0], argc - 1);
+	if (stack_sizes[0] < 0)
 		exit_program(1);
 	free(line);
 	return (0);
