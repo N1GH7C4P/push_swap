@@ -15,7 +15,7 @@
 
 # define MAX_ARGS 1000
 # define MAX_STACK 2000
-# define VERBOSE 0
+# define VERBOSE 1
 # include <unistd.h>
 # include <stdio.h>
 
@@ -44,6 +44,6 @@ void	rotate(int stack[MAX_STACK], int stack_size);
 void	rev_rotate(int stack[MAX_STACK], int stack_size);
 
 // Higher order commands
-void	move_to_top(int stack[MAX_STACK], int stack_size, int index);
+void	move_to_top(int stacks[3][MAX_STACK], int stack_sizes[2], int index, int stack_id);
 
 #endif

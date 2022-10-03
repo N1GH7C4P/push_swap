@@ -50,7 +50,8 @@ void run_command(int stacks[3][MAX_STACK], int stack_sizes[2], char *line, int v
 	}
 	else
 		exit_program(1);
-	//print_stacks(stacks, stack_sizes);
+	if (VERBOSE)
+		print_stacks(stacks, stack_sizes);
 }
 
 // pa & pb
