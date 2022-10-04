@@ -6,16 +6,16 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/30 20:56:07 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:41:37 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/checker.h"
 #include "../libft/libft.h"
 
-void run_command(int stacks[3][MAX_STACK], int stack_sizes[2], char *line, int verbose)
+void run_command(int stacks[3][MAX_STACK], int stack_sizes[3], char *line, int v)
 {
-	if (verbose)
+	if (v)
 		ft_putendl(line);
 	if (!ft_strcmp(line, "sa"))
 		swap_top(stacks[0], stack_sizes[0]);
@@ -50,12 +50,13 @@ void run_command(int stacks[3][MAX_STACK], int stack_sizes[2], char *line, int v
 	}
 	else
 		exit_program(1);
-	//print_stacks(stacks, stack_sizes);
+	if (VERBOSE == 1)
+		print_stacks(stacks, stack_sizes);
 }
 
 // pa & pb
 // push <dest> - take the first element at the top of <src> and put it at the top of <dest>.
-void push_swap(int stacks[3][MAX_STACK], int stack_sizes[2], int direction)
+void push_swap(int stacks[3][MAX_STACK], int stack_sizes[3], int direction)
 {
 	if (direction == 1)
 	{
@@ -102,6 +103,7 @@ void rotate(int stack[MAX_STACK], int stack_size)
 		stack[i + 1] = stack[i];
 		i--;
 	}
+	stack[stack_size] = 0;
 	stack[0] = temp;
 }
 

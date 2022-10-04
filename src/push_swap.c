@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 15:49:07 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/03 17:23:33 by kpolojar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
 
@@ -21,113 +9,82 @@ int main(int argc, char **argv)
 	parser(argc, argv, stacks, stack_sizes);
 	rank_stack(stacks[0], stack_sizes[0]);
 	radix_sort(stacks, stack_sizes);
-	print_stacks(stacks, stack_sizes);
-}
-
-int find_biggest_nb_index(int stack[MAX_STACK], int stack_size)
-{
-	int i;
-	int biggest;
-	int index;
-
-	if (stack_size < 1)
-		return (-1);
-	i = 0;
-	index = 0;
-	biggest = INT_MIN;
-	while (i < MAX_STACK)
-	{
-		if (stack[i] > biggest)
-		{
-			biggest = stack[i];
-			index = i;
-		}
-		i++;
-	}
-	if (biggest > INT_MIN)
-		return (index);
-	else
-		return (-1);
+	//print_stacks(stacks, stack_sizes);
 }
 
 // direction (0) => A -> B, direction (1) => B -> A
-int	push_biggest_nb_on_stack(int stacks[3][MAX_STACK], int stack_sizes[2], int direction)
+int	push_biggest_nb_on_stack(int stacks[3][MAX_STACK], int stack_sizes[3])
 {
 	int index;
+	int nb;
 
-	index = find_biggest_nb_index(stacks[direction], stack_sizes[direction]);
+	index = find_biggest_nb_index(stacks, stack_sizes, 1);
 	if (VERBOSE)
 	{
 		ft_putstr("biggest index: ");
 		ft_putnbr(index);
 		ft_putstr(" nb: ");
-		ft_putnbr(stacks[direction][index]);
+		ft_putnbr(stacks[1][index]);
 		ft_putstr(" stack_size: ");
-		ft_putnbr(stack_sizes[direction]);
+		ft_putnbr(stack_sizes[1]);
 		ft_putendl("");
 	}
 	if (index != -1)
 	{
-		move_to_top(stacks[direction], stack_sizes[direction], index);
-		if (!direction)
-			run_command(stacks, stack_sizes, "pb", 1);
-		else
-			run_command(stacks, stack_sizes, "pa", 1);
-		return (1);
+		move_to_top(stacks, stack_sizes, index, 1);
+		nb = stacks[1][stack_sizes[1] - 1];
+		run_command(stacks, stack_sizes, "pa", 1);
+		return (nb);
 	}
-	return (0);
+	return (-1);
 }
 
-void move_to_top(int stack[MAX_STACK], int stack_size, int index)
+void move_to_top(int stacks[3][MAX_STACK], int stack_sizes[3], int index, int stack_id)
 {
-	if (stack_size < 2)
+	if (stack_sizes[stack_id] < 2)
 		return ;
-	if (index > stack_size)
+	if (index > stack_sizes[stack_id])
 	{
 		ft_putendl("invalid index: ");
 		ft_putnbr(index);
 		ft_putstr(" > ");
-		ft_putnbr(stack_size);
+		ft_putnbr(stack_sizes[stack_id]);
 		ft_putendl("");
 		exit(-1);
 	}
-	if ((stack_size - index) > (stack_size / 2))
+	if ((stack_sizes[stack_id] - index) > (stack_sizes[stack_id] / 2))
 	{
-		while (index != stack_size - 1)
+		while (index != stack_sizes[stack_id] - 1)
 		{
-			rev_rotate(stack, stack_size);
-			ft_putendl("rra");
+			if (stack_id == 0)
+				run_command(stacks, stack_sizes, "rra", 1);
+			else
+				run_command(stacks, stack_sizes, "rrb", 1);
 			if (index == 0)
-				index = stack_size - 1;
+				index = stack_sizes[stack_id] - 1;
 			else
 				index--;
 		}
 	}
 	else
 	{
-		while (index != stack_size - 1)
+		while (index != stack_sizes[stack_id] - 1)
 		{
-			rotate(stack, stack_size);
-			ft_putendl("ra");
-			ft_putnbr(index);
+			if (VERBOSE)
+			{
+				ft_putstr("index: ");
+				ft_putnbr(index);
+				ft_putstr(" stack size: ");
+				ft_putnbr(stack_sizes[stack_id]);
+				ft_putendl("");
+			}
+			if (stack_id == 0)
+				run_command(stacks, stack_sizes, "ra", 1);
+			else
+				run_command(stacks, stack_sizes, "rb", 1);
 			index++;
 		}
 	}
-}
-
-int count_smaller_numbers(int stack[MAX_STACK], int stack_size, int nb)
-{
-	int orig_size;
-	int smaller;
-
-	orig_size = stack_size;
-	smaller = 0;
-	while (orig_size--)
-	{
-		if (stack[orig_size] < nb)
-			smaller++;
-	}
-	return (smaller);
 }
 
 void copy_stack(int	src[MAX_STACK], int	dest[MAX_STACK], int stack_size)
@@ -152,32 +109,44 @@ void rank_stack(int	stack[MAX_STACK], int stack_size)
 	copy_stack(ranked, stack, stack_size);
 }
 
-void radix_sort(int	stacks[3][MAX_STACK], int stack_sizes[2])
+void radix_sort(int	stacks[3][MAX_STACK], int stack_sizes[3])
 {
-	int bit;
+	int	bit;
+	int	nb;
+	int	index;
 
-	bit = 8;
+	nb = find_biggest_nb(stacks, stack_sizes, 0);
+	bit = count_bits(nb);
+	if (VERBOSE)
+	{
+		ft_putstr("bits: ");
+		ft_putnbr(bit);
+		ft_putendl("");
+	}
 	while (bit--)
 	{
 		if(VERBOSE)
 			ft_putendl("Splitting stack B.");
 		split_stack_by_bit(stacks, stack_sizes, bit);
+		nb = find_smallest_nb(stacks, stack_sizes, 2);
+		index = find_nb_index(stacks, stack_sizes, 0, nb);
 		if (VERBOSE)
-			print_stacks(stacks, stack_sizes);
+		{
+			ft_putstr("Smallest returned number: ");
+			ft_putnbr(nb);
+			ft_putstr(" index: ");
+			ft_putnbr(index);
+			ft_putendl("");
+		}
+		if (nb != -1)
+			move_to_top(stacks, stack_sizes, index, 0);
 		if(VERBOSE)
 			ft_putendl("Returning all to A stack.");
 		return_all_to_stack_a(stacks, stack_sizes);
-		if (VERBOSE)
-			print_stacks(stacks, stack_sizes);
 	}
 }
 
-int test_bit(int nb, int bit)
-{
-	return (nb & (1 << bit));
-}
-
-int find_number_to_push(int stacks[3][MAX_STACK], int stack_sizes[2], int bit)
+int find_number_to_push(int stacks[3][MAX_STACK], int stack_sizes[3], int bit)
 {
 	int orig_stack_size;
 	int nb;
@@ -190,7 +159,11 @@ int find_number_to_push(int stacks[3][MAX_STACK], int stack_sizes[2], int bit)
 		{
 			if (VERBOSE)
 				ft_putnbr(test_bit(stacks[0][orig_stack_size - 1], bit));
-			stacks[2][nb - 1] = 1;
+			if (stacks[2][stacks[0][stack_sizes[0] - 2]] == 1 && stacks[0][stack_sizes[0] - 1] == (stacks[0][stack_sizes[0] - 2] + 1))
+			{
+				stacks[2][stacks[0][stack_sizes[0] - 1]] = 1;
+				continue ;
+			}
 			return (orig_stack_size - 1);
 		}
 		orig_stack_size--;
@@ -198,24 +171,29 @@ int find_number_to_push(int stacks[3][MAX_STACK], int stack_sizes[2], int bit)
 	return (-1);
 }
 
-void split_stack_by_bit(int	stacks[3][MAX_STACK], int stack_sizes[2], int bit)
+void split_stack_by_bit(int	stacks[3][MAX_STACK], int stack_sizes[3], int bit)
 {
 	int index;
 
 	index = find_number_to_push(stacks, stack_sizes, bit);
 	while (index != -1)
 	{
-		move_to_top(stacks[0], stack_sizes[0], index);
+		move_to_top(stacks, stack_sizes, index, 0);
 		run_command(stacks, stack_sizes, "pb", 1);
 		index = find_number_to_push(stacks, stack_sizes, bit);
 	}
 }
 
-void	return_all_to_stack_a(int stacks[3][MAX_STACK], int stack_sizes[2])
+void	return_all_to_stack_a(int stacks[3][MAX_STACK], int stack_sizes[3])
 {
 	int ret;
 
-	ret = push_biggest_nb_on_stack(stacks, stack_sizes, 1);
-	while (ret)
-		ret = push_biggest_nb_on_stack(stacks, stack_sizes, 1);
+	ret = push_biggest_nb_on_stack(stacks, stack_sizes);
+	while (ret != -1)
+	{
+		ret = push_biggest_nb_on_stack(stacks, stack_sizes);
+		stacks[2][ret] = 1;
+		stack_sizes[2] = stack_sizes[2] + 1;
+	}
+	clear_stack(stacks, stack_sizes, 1);
 }
