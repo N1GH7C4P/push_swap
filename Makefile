@@ -25,8 +25,8 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-CHECKER_SRC_FILES	= checker utils commands parser
-PUSHSWAP_SRC_FILES	= push_swap parser utils commands
+CHECKER_SRC_FILES	= checker utils commands parser higher_commands preparation getters
+PUSHSWAP_SRC_FILES	= push_swap parser utils commands higher_commands preparation complex_commands getters analysis
 TEST_FILES	=	*
 
 CHECKER_SRC 	= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(CHECKER_SRC_FILES)))

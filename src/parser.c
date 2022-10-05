@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/03 13:05:46 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:55:23 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	check_argument(char *input)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (input[i])
 	{
@@ -32,7 +32,7 @@ static int	check_argument(char *input)
 	return (1);
 }
 
-int	parser(int argc, char **argv, int stacks[3][MAX_STACK], int	stack_sizes[2])
+int	parser(int argc, char **argv, int stacks[3][MAX_STACK], int stack_sizes[2])
 {
 	char		*line;
 
@@ -53,7 +53,7 @@ int	parse_input_string(char *input, int stack[MAX_STACK])
 {
 	int	i;
 	int	nb_count;
-	int nb;
+	int	nb;
 
 	i = 0;
 	nb_count = 0;
@@ -75,9 +75,9 @@ int	parse_input_string(char *input, int stack[MAX_STACK])
 	return (nb_count);
 }
 
-int parse_arguments(char **argv, int stack[MAX_STACK], int stack_size)
+int	parse_arguments(char **argv, int stack[MAX_STACK], int stack_size)
 {
-	int i;
+	int	i;
 
 	i = stack_size;
 	while (argv[i] && i > 0)
