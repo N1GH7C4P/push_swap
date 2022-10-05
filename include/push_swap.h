@@ -3,7 +3,7 @@
 
 # define MAX_ARGS 1000
 # define MAX_STACK 2000
-# define VERBOSE 1
+# define VERBOSE 0
 # include <unistd.h>
 # include <stdio.h>
 

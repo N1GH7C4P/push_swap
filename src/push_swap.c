@@ -9,7 +9,33 @@ int main(int argc, char **argv)
 	parser(argc, argv, stacks, stack_sizes);
 	rank_stack(stacks[0], stack_sizes[0]);
 	radix_sort(stacks, stack_sizes);
-	//print_stacks(stacks, stack_sizes);
+	if (VERBOSE)
+		print_stacks(stacks, stack_sizes);
+}
+
+int is_sort(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id)
+{
+	int i = 0;
+	int top_limiter;
+
+	top_limiter = stack_sizes[stack_id] - 2;
+	while (i < top_limiter)
+	{
+		if (stacks[stack_id][i] != (stacks[stack_id][i + 1] + 1))
+		{
+			if (VERBOSE)
+			{
+				print_stacks(stacks, stack_sizes);
+				ft_putnbr(stacks[stack_id][i]);
+				ft_putstr(" != ");
+				ft_putnbr(stacks[stack_id][i + 1] + 1);
+				ft_putendl("");
+			}
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
 // direction (0) => A -> B, direction (1) => B -> A
@@ -54,8 +80,14 @@ void move_to_top(int stacks[3][MAX_STACK], int stack_sizes[3], int index, int st
 	}
 	if ((stack_sizes[stack_id] - index) > (stack_sizes[stack_id] / 2))
 	{
-		while (index != stack_sizes[stack_id] - 1)
+		while (index != stack_sizes[stack_id] - 1 && index >= 0)
 		{
+			if (VERBOSE)
+			{
+				ft_putstr("index: ");
+				ft_putnbr(index);
+				ft_putendl("");
+			}
 			if (stack_id == 0)
 				run_command(stacks, stack_sizes, "rra", 1);
 			else
@@ -109,6 +141,21 @@ void rank_stack(int	stack[MAX_STACK], int stack_size)
 	copy_stack(ranked, stack, stack_size);
 }
 
+
+int find_first_nonzero_index(int	stacks[3][MAX_STACK], int stack_id)
+{
+	int i;
+
+	i = 0;
+	while (i < MAX_STACK)
+	{
+		if (stacks[stack_id][i] != 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 void radix_sort(int	stacks[3][MAX_STACK], int stack_sizes[3])
 {
 	int	bit;
@@ -128,10 +175,11 @@ void radix_sort(int	stacks[3][MAX_STACK], int stack_sizes[3])
 		if(VERBOSE)
 			ft_putendl("Splitting stack B.");
 		split_stack_by_bit(stacks, stack_sizes, bit);
-		nb = find_smallest_nb(stacks, stack_sizes, 2);
+		nb = find_first_nonzero_index(stacks, 2);
 		index = find_nb_index(stacks, stack_sizes, 0, nb);
 		if (VERBOSE)
 		{
+			print_stacks(stacks, stack_sizes);
 			ft_putstr("Smallest returned number: ");
 			ft_putnbr(nb);
 			ft_putstr(" index: ");
@@ -144,13 +192,14 @@ void radix_sort(int	stacks[3][MAX_STACK], int stack_sizes[3])
 			ft_putendl("Returning all to A stack.");
 		return_all_to_stack_a(stacks, stack_sizes);
 	}
+	move_to_top(stacks, stack_sizes, find_smallest_nb_index(stacks, stack_sizes, 0), 0);
 }
 
 int find_number_to_push(int stacks[3][MAX_STACK], int stack_sizes[3], int bit)
 {
 	int orig_stack_size;
 	int nb;
-	
+
 	orig_stack_size = stack_sizes[0];
 	while (orig_stack_size)
 	{
@@ -159,11 +208,6 @@ int find_number_to_push(int stacks[3][MAX_STACK], int stack_sizes[3], int bit)
 		{
 			if (VERBOSE)
 				ft_putnbr(test_bit(stacks[0][orig_stack_size - 1], bit));
-			if (stacks[2][stacks[0][stack_sizes[0] - 2]] == 1 && stacks[0][stack_sizes[0] - 1] == (stacks[0][stack_sizes[0] - 2] + 1))
-			{
-				stacks[2][stacks[0][stack_sizes[0] - 1]] = 1;
-				continue ;
-			}
 			return (orig_stack_size - 1);
 		}
 		orig_stack_size--;
@@ -175,10 +219,14 @@ void split_stack_by_bit(int	stacks[3][MAX_STACK], int stack_sizes[3], int bit)
 {
 	int index;
 
+	if (is_sort(stacks, stack_sizes, 0))
+		exit(1);
 	index = find_number_to_push(stacks, stack_sizes, bit);
 	while (index != -1)
 	{
 		move_to_top(stacks, stack_sizes, index, 0);
+		if (is_sort(stacks, stack_sizes, 0))
+			exit(1);
 		run_command(stacks, stack_sizes, "pb", 1);
 		index = find_number_to_push(stacks, stack_sizes, bit);
 	}
