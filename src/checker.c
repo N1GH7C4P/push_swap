@@ -6,32 +6,12 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:07:19 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/05 16:59:17 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:42:30 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 #include "../libft/libft.h"
-
-int	check_stacks(int stacks[2][MAX_STACK], int stack_sizes[3])
-{
-	int	i;
-	int	prev;
-
-	if (stack_sizes[0] < 0 || stack_sizes[1] > 0)
-		return -1;
-	prev = INT_MAX;
-	i =  0;
-	while (i < stack_sizes[0])
-	{
-		if (stacks[0][i] > prev)
-			return (-1);
-		else
-			prev = stacks[0][i];
-		i++;
-	}
-	return (1);
-}
 
 int	main(int argc, char **argv)
 {

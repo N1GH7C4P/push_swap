@@ -1,5 +1,17 @@
-#ifndef CHECKER_H
-# define CHECKER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
+/*   Updated: 2022/10/06 14:47:19 by kpolojar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # define MAX_ARGS 1000
 # define MAX_STACK 2000
@@ -8,58 +20,62 @@
 # include <stdio.h>
 
 // Preparation
-void	rev_stack(int stack[MAX_STACK], int stack_size);
-void	rank_stack(int stack[MAX_STACK], int stack_size);
-void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int stack_size);
+void	rev_stack(int s[MAX_STACK], int s_size);
+void	rank_stack(int s[MAX_STACK], int s_size);
+void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
+
+// Checker
+int		check_stacks(int stacks[2][MAX_STACK], int stack_sizes[3]);
 
 // Sorter
-void	split_stack_by_bit(int	stacks[3][MAX_STACK], int stack_sizes[3], int bit);
-void	radix_sort(int	stacks[3][MAX_STACK], int stack_sizes[3]);
-int		is_sort(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
+void	split_stack_by_bit(int stacks[3][MAX_STACK], int s_sizes[3], int bit);
+void	radix_sort(int stacks[3][MAX_STACK], int s_sizes[3]);
+int		is_sort(int s[3][MAX_STACK], int s_sizes[3], int id);
 
 // Utils
-void	copy_stack(int	src[MAX_STACK], int	dest[MAX_STACK], int stack_size);
-void	print_stacks(int stacks[3][MAX_STACK], int stack_sizes[3]);
-void	rank_stack(int	stack[MAX_STACK], int stack_size);
-int		count_smaller_numbers(int stack[MAX_STACK], int stack_size, int nb);
-int		find_smallest_nb_index(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int		find_biggest_nb_index(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int		find_smallest_nb(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int		find_biggest_nb(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int		find_nb_index(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id, int nb);
+void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
+void	print_stacks(int s[3][MAX_STACK], int s_sizes[3]);
+void	rank_stack(int stack[MAX_STACK], int s_size);
+int		count_smaller_numbers(int s[MAX_STACK], int s_size, int nb);
+int		find_smallest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		find_biggest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		find_smallest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		find_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		find_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
 int		count_bits(int n);
 int		test_bit(int nb, int bit);
-void	clear_stack(int stacks[2][MAX_STACK], int stack_sizes[3], int stack_id);
+void	clear_stack(int s[2][MAX_STACK], int s_sizes[3], int s_id);
+void	exit_program(int error);
 
 // Parser
-int		parser(int argc, char **argv, int stacks[3][MAX_STACK], int	stack_sizes[2]);
-int		parse_input_string(char *input, int stack[MAX_STACK]);
-int		parse_arguments(char **argv, int stack[MAX_STACK], int stack_size);
+int		parser(int argc, char **argv, int s[3][MAX_STACK], int stack_sizes[2]);
+int		parse_input_string(char *input, int s[MAX_STACK]);
+int		parse_arguments(char **argv, int s[MAX_STACK], int s_size);
 
 //  Swap commands
-void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *line, int verbose);
-void	swap_top (int stack[MAX_STACK], int stack_size);
-void	push_swap(int stacks[3][MAX_STACK], int stack_sizes[3], int direction);
-void	swap_top (int stack[MAX_STACK], int stack_size);
-void	swap_both(int stacks[3][MAX_STACK], int stack_sizes[3]);
-void	rotate(int stack[MAX_STACK], int stack_size);
-void	rotate_both(int stacks[3][MAX_STACK], int stack_sizes[3]);
-void	rev_rotate(int stack[MAX_STACK], int stack_size);
-void	rev_rotate_both(int stacks[3][MAX_STACK], int stack_sizes[3]);
+void	run_cmd(int s[3][MAX_STACK], int s_sizes[3], char *line, int verbose);
+void	swap_top(int s[MAX_STACK], int s_size);
+void	push_swap(int s[3][MAX_STACK], int s_sizes[3], int direction);
+void	swap_top(int s[MAX_STACK], int s_size);
+void	swap_both(int s[3][MAX_STACK], int s_sizes[3]);
+void	rotate(int s[MAX_STACK], int s_size);
+void	rotate_both(int s[3][MAX_STACK], int s_sizes[3]);
+void	rev_rotate(int s[MAX_STACK], int s_size);
+void	rev_rotate_both(int s[3][MAX_STACK], int s_sizes[3]);
 
 // Higher order commands
-void	move_to_top(int stacks[3][MAX_STACK], int stack_sizes[3], int index, int stack_id);
+void	move_to_top(int s[3][MAX_STACK], int s_sizes[3], int index, int s_id);
 
 // Complex commands
-int		push_biggest_nb(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
-void	push_all(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
+int		push_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int id);
+void	push_all(int s[3][MAX_STACK], int s_sizes[3], int id);
 
 // Getters
-int find_nb_index(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id, int nb);
-int find_smallest_nb_index(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int find_smallest_nb(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int find_biggest_nb(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int find_biggest_nb_index(int stacks[3][MAX_STACK], int stack_sizes[3], int stack_id);
-int count_smaller_numbers(int stack[MAX_STACK], int stack_size, int nb);
+int		find_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
+int		find_smallest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		find_smallest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		find_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		find_biggest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		count_smaller_numbers(int s[MAX_STACK], int s_size, int nb);
 
 #endif

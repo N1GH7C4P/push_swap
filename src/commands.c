@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/05 16:00:03 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:42:01 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../include/checker.h"
 #include "../libft/libft.h"
 
 void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l, int v)

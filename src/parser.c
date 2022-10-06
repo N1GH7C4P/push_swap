@@ -6,11 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/05 16:55:23 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:44:39 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 #include "../libft/libft.h"
 
 static int	check_argument(char *input)
