@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 14:42:59 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:02:33 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,20 @@ void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[3])
 		bigger_stack_size = stack_sizes[1];
 	i = 0;
 	while (i < bigger_stack_size)
-	{	
-		ft_putstr("i: ");
-		ft_putnbr(i);
-		ft_putstr(" | ");
+	{
 		ft_putnbr(stacks[0][i]);
 		ft_putstr(" | ");
 		ft_putnbr(stacks[1][i]);
-		ft_putstr(" | ");
-		ft_putnbr(stacks[2][i]);
 		ft_putendl("");
 		i++;
 	}
 }
 
-void	exit_program(int error)
+void	exit_program(int ret, char *msg)
 {
-	if (error)
-	{
-		ft_putendl("Error");
-		exit(-1);
-	}
-	exit(0);
+	if (msg)
+		ft_putendl(msg);
+	exit(ret);
 }
 
 int	test_bit(int nb, int bit)

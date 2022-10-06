@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:30:01 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/05 16:46:34 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:27:23 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void	push_all(int stacks[3][MAX_STACK], int stack_sizes[3], int id)
 	int	ret;
 
 	ret = push_biggest_nb(stacks, stack_sizes, id);
+	stacks[2][ret] = 1;
 	while (ret != -1)
 	{
 		ret = push_biggest_nb(stacks, stack_sizes, id);
 		stacks[2][ret] = 1;
-		stack_sizes[2] = stack_sizes[2] + 1;
 	}
-	clear_stack(stacks, stack_sizes, 1);
+	clear_stack(stacks, stack_sizes, id);
 }

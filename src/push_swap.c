@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/05 16:45:59 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:33:33 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	static int	stack_sizes[2];
 
 	parser(argc, argv, stacks, stack_sizes);
+	print_stacks(stacks, stack_sizes);
 	rank_stack(stacks[0], stack_sizes[0]);
 	radix_sort(stacks, stack_sizes);
 }

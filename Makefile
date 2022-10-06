@@ -11,6 +11,7 @@ TEST_DIR				= test/
 TEST_EXE				= run_test
 CC						= gcc
 CFLAGS					= -Wall -Werror -Wextra -O3
+TEST_FLAGS				= -fsanitize=address -g
 RM						= rm -f
 
 # Colors
@@ -37,16 +38,29 @@ TEST 			= 	$(addprefix $(TEST_DIR), $(addsuffix .test.c, $(TEST_FILES)))
 
 all:			$(CHECKER) $(PUSHSWAP)
 
+memory_test:	$(PUSHSWAP_OBJ) $(CHECKER_OBJ)
+				@make -C $(LIBFT)
+				@cp libft/libft.a .
+				${CC} $(CFLAGS) $(TEST_FLAGS) $(INCLUDE) $(LIBFT_LIB) $(PUSHSWAP_SRC) -o $(PUSHSWAP)
+				@echo "$(GREEN)memory test push_swap compiled!$(DEF_COLOR)"
+				@make -C $(LIBFT)
+				@cp libft/libft.a .
+				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
+				@echo "$(GREEN)memory test checker compiled!$(DEF_COLOR)"
+				@rm -f libft.a
+
 $(CHECKER):		$(CHECKER_OBJ)
 				@make -C $(LIBFT)
 				@cp libft/libft.a .
 				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
+				@rm -f libft.a
 				@echo "$(GREEN)checker compiled!$(DEF_COLOR)"
 
 $(PUSHSWAP):	$(PUSHSWAP_OBJ)
 				@make -C $(LIBFT)
 				@cp libft/libft.a .
 				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(PUSHSWAP_SRC) -o $(PUSHSWAP)
+				@rm -f libft.a
 				@echo "$(GREEN)push_swap compiled!$(DEF_COLOR)"
 
 clean:
@@ -62,7 +76,7 @@ fclean:			clean
 				@echo "$(CYAN)checker binary files cleaned!$(DEF_COLOR)"
 				@$(RM) -f $(PUSHSWAP)
 				@echo "$(CYAN)push_swap binary files cleaned!$(DEF_COLOR)"
-				@$(RM) -f libft.a
+				@make fclean -C $(LIBFT)
 				@echo "$(CYAN)libft binary files cleaned!$(DEF_COLOR)"
 
 re:				fclean all

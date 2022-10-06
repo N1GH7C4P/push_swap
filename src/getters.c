@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:49:02 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 14:30:16 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:44:25 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	find_smallest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int stack_id)
 		}
 		i++;
 	}
-	if (smallest > INT_MAX)
+	if (smallest < INT_MAX)
 		return (index);
 	else
 		return (-1);

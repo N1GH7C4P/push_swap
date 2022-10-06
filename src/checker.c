@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:07:19 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 14:42:30 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:02:16 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int	main(int argc, char **argv)
 	else
 		ft_putendl("OK");
 	free(line);
-	exit_program(0);
+	exit_program(0, NULL);
 }

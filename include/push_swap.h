@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 14:47:19 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:31:27 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define MAX_ARGS 1000
 # define MAX_STACK 2000
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 # define VERBOSE 0
 # include <unistd.h>
 # include <stdio.h>
@@ -45,12 +47,12 @@ int		find_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
 int		count_bits(int n);
 int		test_bit(int nb, int bit);
 void	clear_stack(int s[2][MAX_STACK], int s_sizes[3], int s_id);
-void	exit_program(int error);
+void	exit_program(int error, char *msg);
 
 // Parser
 int		parser(int argc, char **argv, int s[3][MAX_STACK], int stack_sizes[2]);
 int		parse_input_string(char *input, int s[MAX_STACK]);
-int		parse_arguments(char **argv, int s[MAX_STACK], int s_size);
+int		parse_arguments(char **argv, int s[MAX_STACK], int s_size, int skip_first);
 
 //  Swap commands
 void	run_cmd(int s[3][MAX_STACK], int s_sizes[3], char *line, int verbose);
