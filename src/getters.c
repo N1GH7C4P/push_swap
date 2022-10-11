@@ -6,14 +6,14 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:49:02 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 15:44:25 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:53:46 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
 
-int	find_nb_index(int s[3][MAX_STACK], int s_sizes[3], int stack_id, int nb)
+int	get_index(int s[3][MAX_STACK], int s_sizes[3], int stack_id, int nb)
 {
 	int	i;
 
@@ -29,95 +29,48 @@ int	find_nb_index(int s[3][MAX_STACK], int s_sizes[3], int stack_id, int nb)
 	return (-1);
 }
 
-int	find_smallest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int stack_id)
+int	get_smallest(int s[3][MAX_STACK], int s_sizes[3], int stack_id)
 {
-	int	i;
-	int	smallest;
-	int	index;
+	int		i;
+	long	smallest;
+	long	limit;
 
+	limit = 2147483648l;
 	if (s_sizes[stack_id] < 1)
 		return (-1);
 	i = 0;
-	smallest = INT_MAX;
-	while (i < MAX_STACK)
-	{
-		if (s[stack_id][i] < smallest)
-		{
-			smallest = s[stack_id][i];
-			index = i;
-		}
-		i++;
-	}
-	if (smallest < INT_MAX)
-		return (index);
-	else
-		return (-1);
-}
-
-int	find_smallest_nb(int s[3][MAX_STACK], int s_sizes[3], int stack_id)
-{
-	int	i;
-	int	smallest;
-
-	if (s_sizes[stack_id] < 1)
-		return (-1);
-	i = 0;
-	smallest = INT_MAX;
+	smallest = limit;
 	while (i < MAX_STACK)
 	{
 		if (s[stack_id][i] < smallest && s[stack_id][i] > 0)
 			smallest = s[stack_id][i];
 		i++;
 	}
-	if (smallest < INT_MAX)
+	if (smallest < limit)
 		return (smallest);
 	else
 		return (-1);
 }
 
-int	find_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int stack_id)
+int	get_biggest(int s[3][MAX_STACK], int s_sizes[3], int stack_id)
 {
-	int	i;
-	int	biggest;
+	int		i;
+	long	biggest;
+	long	limit;
 
+	limit = -2147483649l;
 	if (s_sizes[stack_id] < 1)
 		return (-1);
 	i = 0;
-	biggest = INT_MIN;
+	biggest = limit;
 	while (i < MAX_STACK)
 	{
 		if (s[stack_id][i] > biggest)
 			biggest = s[stack_id][i];
 		i++;
 	}
-	if (biggest > INT_MIN)
+	if (biggest > limit)
 		return (biggest);
-	else
-		return (-1);
-}
-
-int	find_biggest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int stack_id)
-{
-	int	i;
-	int	biggest;
-	int	index;
-
-	if (s_sizes[stack_id] < 1)
-		return (-1);
-	i = 0;
-	index = 0;
-	biggest = INT_MIN;
-	while (i < MAX_STACK)
-	{
-		if (s[stack_id][i] > biggest)
-		{
-			biggest = s[stack_id][i];
-			index = i;
-		}
-		i++;
-	}
-	if (biggest > INT_MIN)
-		return (index);
 	else
 		return (-1);
 }

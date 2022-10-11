@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 16:31:27 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:48:13 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
 void	print_stacks(int s[3][MAX_STACK], int s_sizes[3]);
 void	rank_stack(int stack[MAX_STACK], int s_size);
 int		count_smaller_numbers(int s[MAX_STACK], int s_size, int nb);
-int		find_smallest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		find_biggest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		find_smallest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		find_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		find_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
+int		get_smallest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		get_biggest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		get_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
 int		count_bits(int n);
 int		test_bit(int nb, int bit);
 void	clear_stack(int s[2][MAX_STACK], int s_sizes[3], int s_id);

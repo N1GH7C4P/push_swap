@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:07:19 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 16:02:16 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:53:03 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	char		*line;
 
 	parser(argc, argv, stacks, stack_sizes);
-	print_stacks(stacks, stack_sizes);
 	line = NULL;
 	ret = ft_get_next_line(0, &line);
 	while (ret == 1 && ft_strcmp(line, "") && ft_strcmp(line, "\n"))
@@ -29,7 +28,6 @@ int	main(int argc, char **argv)
 		run_cmd(stacks, stack_sizes, line, 0);
 		ret = ft_get_next_line(0, &line);
 	}
-	print_stacks(stacks, stack_sizes);
 	if (check_stacks(stacks, stack_sizes) == -1)
 		ft_putendl("KO");
 	else

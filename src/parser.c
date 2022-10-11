@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 17:04:10 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:31:33 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	parser(int argc, char **argv, int stacks[3][MAX_STACK], int stack_sizes[2])
 	if (argc == 2)
 		stack_sizes[0] = parse_input_string(argv[1], stacks[0]);
 	else
-		stack_sizes[0] = parse_arguments(argv, stacks[0], argc - 1, 0);
+		stack_sizes[0] = parse_arguments(argv, stacks[0], argc - 1, 1);
 	return (0);
 }
 
@@ -59,18 +59,16 @@ int	parse_arguments(char **argv, int stack[MAX_STACK], int stack_size, int skip_
 {
 	int	i;
 	
-	i = stack_size;
-	if (skip_first == 0)
-		i--;
+	i = 0;
+	if (skip_first == 1)
+		i++;
 	while (argv[i])
 	{
-		if (skip_first == 0 && i == 0)
-			break ;
-		else if (check_argument(argv[i]) == -1)
+		if (check_argument(argv[i]) == -1)
 			return (-1);
 		else
-			stack[i - 1] = ft_atoi(argv[i]);
-		i--;
+			stack[i - skip_first] = ft_atoi(argv[i]);
+		i++;
 	}
 	rev_stack(stack, stack_size);
 	return (stack_size);

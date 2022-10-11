@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:30:01 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 15:27:23 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:51:53 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	push_biggest_nb(int stacks[3][MAX_STACK], int stack_sizes[3], int id)
 	int	i;
 	int	nb;
 
-	i = find_biggest_nb_index(stacks, stack_sizes, id);
+	i = get_index(stacks, stack_sizes, id, get_biggest(stacks, stack_sizes, id));
 	if (i != -1)
 	{
 		move_to_top(stacks, stack_sizes, i, id);

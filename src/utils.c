@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 16:02:33 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:49:59 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[3])
 		ft_putnbr(stacks[0][i]);
 		ft_putstr(" | ");
 		ft_putnbr(stacks[1][i]);
+		ft_putstr(" | ");
+		ft_putnbr(stacks[2][i]);
 		ft_putendl("");
 		i++;
 	}
