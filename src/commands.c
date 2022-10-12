@@ -6,59 +6,46 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/30 20:56:07 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:42:01 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 #include "../libft/libft.h"
 
-void run_command(int stacks[3][MAX_STACK], int stack_sizes[2], char *line, int verbose)
+void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l, int v)
 {
-	if (verbose)
-		ft_putendl(line);
-	if (!ft_strcmp(line, "sa"))
+	if (v)
+		ft_putendl(l);
+	if (!ft_strcmp(l, "sa"))
 		swap_top(stacks[0], stack_sizes[0]);
-	else if(!ft_strcmp(line, "sb"))
+	else if (!ft_strcmp(l, "sb"))
 		swap_top(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(line, "ss"))
-	{
-		swap_top(stacks[0], stack_sizes[0]);
-		swap_top(stacks[1], stack_sizes[1]);
-	}
-	else if (!ft_strcmp(line, "pa"))
+	else if (!ft_strcmp(l, "ss"))
+		swap_both(stacks, stack_sizes);
+	else if (!ft_strcmp(l, "pa"))
 		push_swap(stacks, stack_sizes, 1);
-	else if (!ft_strcmp(line, "pb"))
+	else if (!ft_strcmp(l, "pb"))
 		push_swap(stacks, stack_sizes, 2);
-	else if (!ft_strcmp(line, "ra"))
+	else if (!ft_strcmp(l, "ra"))
 		rotate(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(line, "rb"))
+	else if (!ft_strcmp(l, "rb"))
 		rotate(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(line, "rr"))
-	{
-		rotate(stacks[0], stack_sizes[0]);
-		rotate(stacks[1], stack_sizes[1]);
-	}
-	else if (!ft_strcmp(line, "rra"))
+	else if (!ft_strcmp(l, "rr"))
+		rotate_both(stacks, stack_sizes);
+	else if (!ft_strcmp(l, "rra"))
 		rev_rotate(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(line, "rrb"))
+	else if (!ft_strcmp(l, "rrb"))
 		rev_rotate(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(line, "rrr"))
-	{
-		rev_rotate(stacks[0], stack_sizes[0]);
-		rev_rotate(stacks[1], stack_sizes[1]);
-	}
-	else
-		exit_program(1);
-	if (VERBOSE)
-		print_stacks(stacks, stack_sizes);
+	else if (!ft_strcmp(l, "rrr"))
+		rotate_both(stacks, stack_sizes);
 }
 
 // pa & pb
-// push <dest> - take the first element at the top of <src> and put it at the top of <dest>.
-void push_swap(int stacks[3][MAX_STACK], int stack_sizes[2], int direction)
+// push <dest> - take top of <src> and put it at the top of <dest>.
+void	push_swap(int stacks[3][MAX_STACK], int stack_sizes[3], int dir)
 {
-	if (direction == 1)
+	if (dir == 1)
 	{
 		if (stack_sizes[1] < 1)
 			return ;
@@ -67,7 +54,7 @@ void push_swap(int stacks[3][MAX_STACK], int stack_sizes[2], int direction)
 		stack_sizes[0]++;
 		stack_sizes[1]--;
 	}
-	else if (direction == 2)
+	else if (dir == 2)
 	{
 		if (stack_sizes[0] < 1)
 			return ;
@@ -80,7 +67,7 @@ void push_swap(int stacks[3][MAX_STACK], int stack_sizes[2], int direction)
 
 // sa & sb & ss
 // swap <stack> - swap the first 2 elements at the top of <stack>.
-void swap_top (int stack[MAX_STACK], int stack_size)
+void	swap_top(int stack[MAX_STACK], int stack_size)
 {
 	if (stack_size < 2)
 		return ;
@@ -88,8 +75,8 @@ void swap_top (int stack[MAX_STACK], int stack_size)
 }
 
 // ra & rb & rr
-// rotate <stack> - shift up all elements of <stack> a by 1. The first element becomes the last one.
-void rotate(int stack[MAX_STACK], int stack_size)
+// rotate <stack> - shift up <stack> a by 1. The first becomes the last.
+void	rotate(int stack[MAX_STACK], int stack_size)
 {
 	int	temp;
 	int	i;
@@ -103,12 +90,13 @@ void rotate(int stack[MAX_STACK], int stack_size)
 		stack[i + 1] = stack[i];
 		i--;
 	}
+	stack[stack_size] = 0;
 	stack[0] = temp;
 }
 
 //rra & rrb & rrr
-// reverse rotate <stack> - shift down all elements of <stack> a by 1. The last element becomes the first one.
-void rev_rotate(int stack[MAX_STACK], int stack_size)
+// reverse rotate <stack> - shift down <stack> a by 1. The last the first.
+void	rev_rotate(int stack[MAX_STACK], int stack_size)
 {
 	int	temp;
 	int	i;
@@ -123,23 +111,4 @@ void rev_rotate(int stack[MAX_STACK], int stack_size)
 		i++;
 	}
 	stack[stack_size - 1] = temp;
-}
-
-// Extra
-void rev_stack(int stack[MAX_STACK], int stack_size)
-{
-	int	start;
-	int	end;	
-	int	temp;
-
-	end = stack_size - 1;
-	start = 0;
-	while (start < end)
-	{
-		temp = stack[start];
-		stack[start] = stack[end];
-		stack[end] = temp;
-		start++;
-		end--;
-	}
 }

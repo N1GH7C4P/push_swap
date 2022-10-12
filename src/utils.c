@@ -6,47 +6,22 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/30 15:09:26 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:49:59 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/checker.h"
+#include "../include/push_swap.h"
 #include "../libft/libft.h"
 
-int check_stacks(int stacks[3][MAX_STACK], int stack_sizes[2], int verbose)
+void	print_stack_sizes(int stack_sizes[3])
 {
-	int	i;
-	int	prev;
-
-	if (stack_sizes[0] < 0 || stack_sizes[1] > 0)
-	{
-		if (verbose)
-			ft_putendl("Invalid stack sizes");
-		return -1;
-	}
-	prev = INT_MAX;
-	i =  0;
-	while (i < stack_sizes[0])
-	{
-		if (stacks[0][i] > prev)
-		{
-			if (verbose)
-			{
-				ft_putnbr(stacks[0][i]);
-				ft_putstr(" > ");
-				ft_putnbr(prev);
-				ft_putendl("");
-			}
-			return (-1);
-		}
-		else
-			prev = stacks[0][i];
-		i++;
-	}
-	return (1);
+	ft_putnbr(stack_sizes[0]);
+	ft_putstr(" | ");
+	ft_putnbr(stack_sizes[1]);
+	ft_putendl("");
 }
 
-void print_stacks(int stacks[3][MAX_STACK], int stack_sizes[2])
+void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[3])
 {
 	size_t	i;
 	size_t	bigger_stack_size;
@@ -56,29 +31,39 @@ void print_stacks(int stacks[3][MAX_STACK], int stack_sizes[2])
 	else
 		bigger_stack_size = stack_sizes[1];
 	i = 0;
-	ft_putendl("-----");
 	while (i < bigger_stack_size)
 	{
 		ft_putnbr(stacks[0][i]);
 		ft_putstr(" | ");
 		ft_putnbr(stacks[1][i]);
+		ft_putstr(" | ");
+		ft_putnbr(stacks[2][i]);
 		ft_putendl("");
 		i++;
 	}
-	ft_putendl("-----");
-	ft_putnbr(stack_sizes[0]);
-	ft_putstr(" | ");
-	ft_putnbr(stack_sizes[1]);
-	ft_putendl("");
-	return ;
 }
 
- void exit_program(int error)
+void	exit_program(int ret, char *msg)
 {
-	if (error)
+	if (msg)
+		ft_putendl(msg);
+	exit(ret);
+}
+
+int	test_bit(int nb, int bit)
+{
+	return (nb & (1 << bit));
+}
+
+void	clear_stack(int stacks[2][MAX_STACK], int stack_sizes[3], int stack_id)
+{
+	int	i;
+
+	i = 0;
+	while (i < MAX_STACK)
 	{
-		ft_putendl("Error");
-		exit(-1);
+		stacks[stack_id][i] = 0;
+		i++;
 	}
-	exit(0);
+	stack_sizes[stack_id] = 0;
 }
