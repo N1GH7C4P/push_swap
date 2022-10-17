@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/11 14:48:13 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:40:33 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
 int		check_stacks(int stacks[2][MAX_STACK], int stack_sizes[3]);
 
 // Sorter
-void	split_stack_by_bit(int stacks[3][MAX_STACK], int s_sizes[3], int bit);
+void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g);
 void	radix_sort(int stacks[3][MAX_STACK], int s_sizes[3]);
 int		is_sort(int s[3][MAX_STACK], int s_sizes[3], int id);
+int		is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
 
 // Utils
 void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
@@ -50,7 +51,7 @@ void	exit_program(int error, char *msg);
 // Parser
 int		parser(int argc, char **argv, int s[3][MAX_STACK], int stack_sizes[2]);
 int		parse_input_string(char *input, int s[MAX_STACK]);
-int		parse_arguments(char **argv, int s[MAX_STACK], int s_size, int skip_first);
+int		parse_arguments(char **argv, int s[MAX_STACK], int size, int skip);
 
 //  Swap commands
 void	run_cmd(int s[3][MAX_STACK], int s_sizes[3], char *line, int verbose);
@@ -71,11 +72,9 @@ int		push_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int id);
 void	push_all(int s[3][MAX_STACK], int s_sizes[3], int id);
 
 // Getters
-int		find_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
-int		find_smallest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		find_smallest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		find_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		find_biggest_nb_index(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		get_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
+int		get_smallest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
+int		get_biggest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
 int		count_smaller_numbers(int s[MAX_STACK], int s_size, int nb);
-
+int		get_radix_median(int radix);
 #endif

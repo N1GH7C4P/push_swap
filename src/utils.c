@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/11 15:49:59 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:19:14 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[3])
 	size_t	bigger_stack_size;
 
 	if (stack_sizes[0] > stack_sizes[1])
-		bigger_stack_size = stack_sizes[0];
+		bigger_stack_size = stack_sizes[0] + 1;
 	else
-		bigger_stack_size = stack_sizes[1];
+		bigger_stack_size = stack_sizes[1] + 1;
 	i = 0;
 	while (i < bigger_stack_size)
 	{

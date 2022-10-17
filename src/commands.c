@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 14:42:01 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:37:21 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l, int v)
 	else if (!ft_strcmp(l, "rrb"))
 		rev_rotate(stacks[1], stack_sizes[1]);
 	else if (!ft_strcmp(l, "rrr"))
-		rotate_both(stacks, stack_sizes);
+		rev_rotate_both(stacks, stack_sizes);
 }
 
 // pa & pb
