@@ -6,12 +6,32 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:24 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 16:16:31 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:34:54 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
+
+void	micro_sort(int stacks[3][MAX_STACK], int stack_sizes[3])
+{
+	if (!is_sort(stacks, stack_sizes, 0))
+	{
+		if (is_sequenced(stacks, stack_sizes, 0))
+		{
+			while (!is_sort(stacks, stack_sizes, 0))
+				run_cmd(stacks, stack_sizes, "ra", 1);
+		}
+		else if (stacks[0][0] == 2 && stacks[0][1] == 3)
+		{
+			run_cmd(stacks, stack_sizes, "pb", 1);
+			run_cmd(stacks, stack_sizes, "rra", 1);
+			run_cmd(stacks, stack_sizes, "pa", 1);
+		}
+		else
+			run_cmd(stacks, stack_sizes, "rra", 1);
+	}
+}
 
 int is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id)
 {
@@ -20,7 +40,7 @@ int is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id)
 
 	if (stack_sizes[1] > 0)
 		return (0);
-	index = get_index(stacks, stack_sizes, id, get_biggest(stacks, stack_sizes, id));
+	index = get_index(stacks[0], stack_sizes[0], get_biggest(stacks, stack_sizes, id));
 	i = 0;
 	while (i < stack_sizes[id] - 2)
 	{
@@ -56,15 +76,6 @@ int	is_sort(int stacks[3][MAX_STACK], int stack_sizes[3], int id)
 	return (1);
 }
 
-int	check_stacks(int stacks[2][MAX_STACK], int stack_sizes[3])
-{
-	if (stack_sizes[0] < 0 || stack_sizes[1] > 0)
-		return (-1);
-	if (is_sort(stacks, stack_sizes, 0))
-		return (1);
-	return (0);
-}
-
 int	count_smaller_numbers(int stack[MAX_STACK], int stack_size, int nb)
 {
 	int	orig_size;
@@ -94,17 +105,4 @@ int	count_bits(int n)
 	}
 	bits--;
 	return (bits);
-}
-
-int	get_radix_median(int radix)
-{
-	int	median;
-
-	median = 1;
-	while (radix)
-	{
-		median = median * 2;
-		radix--;
-	}
-	return (median + median / 2);
 }

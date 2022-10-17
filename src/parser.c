@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 14:23:30 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:38:25 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	check_argument(char *input)
 {
 	size_t	i;
 
-	if (atoi(input) == INT_MIN || atoi(input) == INT_MAX)
-		exit_program(-1, "INT_MIN & INT MAX not supported.");
 	i = 0;
 	if (input[i] == '-')
 		i++;
@@ -58,6 +56,8 @@ int	parse_input_string(char *input, int stack[MAX_STACK])
 int	parse_arguments(char **argv, int stack[MAX_STACK], int size, int skip_first)
 {
 	int	i;
+	int	index;
+	int nb;
 
 	i = 0;
 	if (skip_first == 1)
@@ -65,9 +65,15 @@ int	parse_arguments(char **argv, int stack[MAX_STACK], int size, int skip_first)
 	while (argv[i])
 	{
 		if (check_argument(argv[i]) == -1)
-			return (-1);
+			exit_program(-1, "Invalid argument!");
 		else
-			stack[i - skip_first] = ft_atoi(argv[i]);
+		{
+			nb = ft_atoi(argv[i]);
+			index = get_index(stack, size, nb);
+			if (index != -1)
+				exit_program(-1, "Duplicate value!");
+			stack[i - skip_first] = nb;
+		}
 		i++;
 	}
 	rev_stack(stack, size);

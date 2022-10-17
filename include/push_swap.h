@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 15:40:33 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:32:09 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 // Preparation
 void	rev_stack(int s[MAX_STACK], int s_size);
-void	rank_stack(int s[MAX_STACK], int s_size);
 void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
+void	rank_stack(int stacks[3][MAX_STACK], int stack_sizes[3], int s_id);
 
 // Checker
 int		check_stacks(int stacks[2][MAX_STACK], int stack_sizes[3]);
@@ -34,15 +34,14 @@ void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g);
 void	radix_sort(int stacks[3][MAX_STACK], int s_sizes[3]);
 int		is_sort(int s[3][MAX_STACK], int s_sizes[3], int id);
 int		is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
+void	micro_sort(int stacks[3][MAX_STACK], int stack_sizes[3]);
 
 // Utils
 void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
 void	print_stacks(int s[3][MAX_STACK], int s_sizes[3]);
-void	rank_stack(int stack[MAX_STACK], int s_size);
-int		count_smaller_numbers(int s[MAX_STACK], int s_size, int nb);
+int		count_smaller_numbers(int s[MAX_STACK], int stack_size, int nb);
 int		get_smallest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
 int		get_biggest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		get_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
 int		count_bits(int n);
 int		test_bit(int nb, int bit);
 void	clear_stack(int s[2][MAX_STACK], int s_sizes[3], int s_id);
@@ -51,7 +50,7 @@ void	exit_program(int error, char *msg);
 // Parser
 int		parser(int argc, char **argv, int s[3][MAX_STACK], int stack_sizes[2]);
 int		parse_input_string(char *input, int s[MAX_STACK]);
-int		parse_arguments(char **argv, int s[MAX_STACK], int size, int skip);
+int		parse_arguments(char **argv, int s[MAX_STACK], int size, int skip_first);
 
 //  Swap commands
 void	run_cmd(int s[3][MAX_STACK], int s_sizes[3], char *line, int verbose);
@@ -72,9 +71,8 @@ int		push_biggest_nb(int s[3][MAX_STACK], int s_sizes[3], int id);
 void	push_all(int s[3][MAX_STACK], int s_sizes[3], int id);
 
 // Getters
-int		get_index(int s[3][MAX_STACK], int s_sizes[3], int s_id, int nb);
+int		get_index(int s[MAX_STACK], int s_size, int nb);
 int		get_smallest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
 int		get_biggest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		count_smaller_numbers(int s[MAX_STACK], int s_size, int nb);
 int		get_radix_median(int radix);
 #endif

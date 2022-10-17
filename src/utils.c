@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 15:19:14 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:39:00 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	exit_program(int ret, char *msg)
 	exit(ret);
 }
 
-int	test_bit(int nb, int bit)
+int		test_bit(int nb, int bit)
 {
 	return (nb & (1 << bit));
 }

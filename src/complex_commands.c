@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:30:01 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 15:17:41 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:36:19 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	go_high(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
 		if (id == 0)
 		{
 			biggest = get_biggest(stacks, sizes, 1);
-			index = get_index(stacks, sizes, 1, biggest);
+			index = get_index(stacks[1], sizes[1], biggest);
 			if ((sizes[1] - index) <= (sizes[1] / 2))
 				run_cmd(stacks, sizes, "rr", 1);
 			else
@@ -45,7 +45,7 @@ static void	go_low(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
 		if (id == 0)
 		{
 			biggest = get_biggest(stacks, sizes, 1);
-			index = get_index(stacks, sizes, 1, biggest);
+			index = get_index(stacks[1], sizes[1], biggest);
 			if ((sizes[1] - index) > (sizes[1] / 2))
 				run_cmd(stacks, sizes, "rrr", 1);
 			else
@@ -72,13 +72,13 @@ void	move_to_top(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
 		go_high(stacks, sizes, i, id);
 }
 
-int	push_biggest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
+int		push_biggest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
 {
 	int	i;
 	int	nb;
 
 	nb = get_biggest(stacks, sizes, id);
-	i = get_index(stacks, sizes, id, nb);
+	i = get_index(stacks[id], sizes[id], nb);
 	if (i != -1)
 	{
 		move_to_top(stacks, sizes, i, id);

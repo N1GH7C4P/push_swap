@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 16:19:14 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:37:19 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 int	main(int argc, char **argv)
 {
 	static int	s[3][MAX_STACK];
-	static int	sizes[2];
+	static int	sizes[3];
 
 	if (argc < 2)
 		exit_program(0, NULL);
 	parser(argc, argv, s, sizes);
-	rank_stack(s[0], sizes[0]);
-	radix_sort(s, sizes);
+	rank_stack(s, sizes, 0);
+	if (sizes[0] == 3)
+		micro_sort(s, sizes);
+	else
+		radix_sort(s, sizes);
 }
 
 static int	find_first_nonzero_index(int s[3][MAX_STACK], int id)
@@ -53,7 +56,7 @@ void	radix_sort(int s[3][MAX_STACK], int sizes[3])
 	{
 		split_stack_by_bit(s, sizes, b, g);
 		nb = find_first_nonzero_index(s, 2);
-		i = get_index(s, sizes, 0, nb);
+		i = get_index(s[0], sizes[0], nb);
 		if (nb != -1)
 			move_to_top(s, sizes, i, 0);
 		push_all(s, sizes, 1);
@@ -65,7 +68,7 @@ void	radix_sort(int s[3][MAX_STACK], int sizes[3])
 		else
 			g = 1;
 	}
-	move_to_top(s, sizes, get_index(s, sizes, 0, get_smallest(s, sizes, 0)), 0);
+	move_to_top(s, sizes, get_index(s[0], sizes[0], get_smallest(s, sizes, 0)), 0);
 }
 
 static int	find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g)
@@ -101,7 +104,7 @@ void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g)
 	if (is_sequenced(s, sizes, 0))
 	{
 		if (!is_sort(s, sizes, 0))
-			move_to_top(s, sizes, get_index(s, sizes, 0, get_smallest(s, sizes, 0)), 0);
+			move_to_top(s, sizes, get_index(s[0], sizes[0], get_smallest(s, sizes, 0)), 0);
 		exit(1);
 	}
 	i = find_number_to_push(s, sizes, b, g);
