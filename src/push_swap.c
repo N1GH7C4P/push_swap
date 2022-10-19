@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 18:16:50 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:28:49 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	micro_sort(int s[3][MAX_STACK], int sizes[3])
 			select_cmd(s, sizes, "sa", 1);
 			select_cmd(s, sizes, "rra", 1);
 		}
+		else if (s[0][1] == 1 && s[0][0] == 3)
+			select_cmd(s, sizes, "sa", 1);
 		else
 			select_cmd(s, sizes, "rra", 1);
 	}

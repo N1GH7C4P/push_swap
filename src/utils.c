@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 17:47:00 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:48:16 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	exit_program(int ret, char *msg)
 	if (msg && DESCRIPTIVE_MESSAGES == 1)
 		ft_putendl(msg);
 	else if (ret == -1)
-		ft_putendl("Error");
+		ft_putendl_fd("Error", 2);
 	exit(ret);
 }
 
