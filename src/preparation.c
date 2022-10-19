@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:22:53 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 14:20:50 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:58:47 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int stack_size)
 		dest[orig_size] = src[orig_size];
 }
 
-void	rank_stack(int stacks[3][MAX_STACK], int stack_sizes[3], int s_id)
+void	rank_stack(int s[3][MAX_STACK], int sizes[3], int id)
 {
 	int	ranked[MAX_STACK];
 	int	orig_size;
-	int	smaller;
+	int	c;
 
-	orig_size = stack_sizes[s_id];
+	orig_size = sizes[id];
 	while (orig_size--)
 	{
-		smaller = count_smaller_numbers(stacks[s_id], stack_sizes[s_id], stacks[s_id][orig_size]);
-		ranked[orig_size] = smaller + 1;
+		c = count_smaller_numbers(s[id], sizes[id], s[id][orig_size]);
+		ranked[orig_size] = c + 1;
 	}
-	copy_stack(ranked, stacks[s_id], stack_sizes[s_id]);
+	copy_stack(ranked, s[id], sizes[id]);
 }
 
 void	rev_stack(int stack[MAX_STACK], int stack_size)

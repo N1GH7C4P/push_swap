@@ -6,14 +6,14 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 17:18:27 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:04:40 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# define DESCRIPTIVE_MESSAGES 1
+# define DESCRIPTIVE_MESSAGES 0
 # define MAX_ARGS 1000
 # define MAX_STACK 2000
 # define INT_MAX 2147483647
@@ -38,7 +38,6 @@ int		is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
 void	micro_sort(int stacks[3][MAX_STACK], int stack_sizes[3]);
 void	mini_sort(int stacks[3][MAX_STACK], int stack_sizes[3]);
 
-
 // Utils
 void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
 void	print_stacks(int s[3][MAX_STACK], int s_sizes[3]);
@@ -53,11 +52,13 @@ void	exit_program(int error, char *msg);
 // Parser
 int		parser(int argc, char **argv, int s[3][MAX_STACK], int stack_sizes[2]);
 int		parse_input_string(char *input, int s[MAX_STACK]);
-int		parse_arguments(char **argv, int s[MAX_STACK], int size, int skip_first);
+int		parse_arguments(char **argv, int s[MAX_STACK], int size, int skip);
 
-//  Swap commands
+// Command handling
 void	select_cmd(int s[3][MAX_STACK], int s_sizes[3], char *line, int v);
 void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l);
+
+//  Swap commands
 void	swap_top(int s[MAX_STACK], int s_size);
 void	push_swap(int s[3][MAX_STACK], int s_sizes[3], int direction);
 void	swap_top(int s[MAX_STACK], int s_size);
@@ -80,4 +81,5 @@ int		get_index(int s[MAX_STACK], int s_size, int nb);
 int		get_smallest(int s[3][MAX_STACK], int sizes[3], int id);
 int		get_biggest(int s[3][MAX_STACK], int sizes[3], int id);
 int		get_radix_median(int radix);
+int		get_first_nonzero_index(int s[3][MAX_STACK], int id);
 #endif

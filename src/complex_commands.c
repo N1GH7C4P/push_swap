@@ -6,73 +6,14 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:30:01 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 17:30:09 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:01:30 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
 
-static void	go_high(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
-{
-	int	biggest;
-	int index;
-
-	while (i != sizes[id] - 1)
-	{
-		if (id == 0)
-		{
-			biggest = get_biggest(stacks, sizes, 1);
-			index = get_index(stacks[1], sizes[1], biggest);
-			if ((sizes[1] - index) <= (sizes[1] / 2))
-				select_cmd(stacks, sizes, "rr", 1);
-			else
-				select_cmd(stacks, sizes, "ra", 1);
-		}
-		else
-			select_cmd(stacks, sizes, "rb", 1);
-		i++;
-	}
-}
-
-static void	go_low(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
-{
-	int	biggest;
-	int index;
-
-	while (i != sizes[id] - 1 && i >= 0)
-	{
-		if (id == 0)
-		{
-			biggest = get_biggest(stacks, sizes, 1);
-			index = get_index(stacks[1], sizes[1], biggest);
-			if ((sizes[1] - index) > (sizes[1] / 2))
-				select_cmd(stacks, sizes, "rrr", 1);
-			else
-				select_cmd(stacks, sizes, "rra", 1);
-		}
-		else
-			select_cmd(stacks, sizes, "rrb", 1);
-		if (i == 0)
-			i = sizes[id] - 1;
-		else
-			i--;
-	}
-}
-
-void	move_to_top(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
-{
-	if (sizes[id] < 2)
-		return ;
-	if (i > sizes[id])
-		exit(-1);
-	if ((sizes[id] - i) > (sizes[id] / 2) + 1)
-		go_low(stacks, sizes, i, id);
-	else
-		go_high(stacks, sizes, i, id);
-}
-
-int		push_smallest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
+int	push_smallest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
 {
 	int	i;
 	int	nb;
@@ -91,7 +32,7 @@ int		push_smallest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
 	return (-1);
 }
 
-int		push_biggest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
+int	push_biggest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
 {
 	int	i;
 	int	nb;

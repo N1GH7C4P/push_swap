@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:49:02 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 18:34:13 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:48:29 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,18 @@ int	get_radix_median(int radix)
 		radix--;
 	}
 	return (median + median / 2);
+}
+
+int	get_first_nonzero_index(int s[3][MAX_STACK], int id)
+{
+	int	i;
+
+	i = 0;
+	while (i < MAX_STACK)
+	{
+		if (s[id][i] != 0)
+			return (i);
+		i++;
+	}
+	return (-1);
 }

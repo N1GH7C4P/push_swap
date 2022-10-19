@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:53:39 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 14:54:40 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:01:13 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,63 @@ void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l)
 		rev_rotate(stacks[1], stack_sizes[1]);
 	else if (!ft_strcmp(l, "rrr"))
 		rev_rotate_both(stacks, stack_sizes);
+}
+
+static void	go_high(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
+{
+	int	biggest;
+	int	index;
+
+	while (i != sizes[id] - 1)
+	{
+		if (id == 0)
+		{
+			biggest = get_biggest(stacks, sizes, 1);
+			index = get_index(stacks[1], sizes[1], biggest);
+			if ((sizes[1] - index) <= (sizes[1] / 2))
+				select_cmd(stacks, sizes, "rr", 1);
+			else
+				select_cmd(stacks, sizes, "ra", 1);
+		}
+		else
+			select_cmd(stacks, sizes, "rb", 1);
+		i++;
+	}
+}
+
+static void	go_low(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
+{
+	int	biggest;
+	int	index;
+
+	while (i != sizes[id] - 1 && i >= 0)
+	{
+		if (id == 0)
+		{
+			biggest = get_biggest(stacks, sizes, 1);
+			index = get_index(stacks[1], sizes[1], biggest);
+			if ((sizes[1] - index) > (sizes[1] / 2))
+				select_cmd(stacks, sizes, "rrr", 1);
+			else
+				select_cmd(stacks, sizes, "rra", 1);
+		}
+		else
+			select_cmd(stacks, sizes, "rrb", 1);
+		if (i == 0)
+			i = sizes[id] - 1;
+		else
+			i--;
+	}
+}
+
+void	move_to_top(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
+{
+	if (sizes[id] < 2)
+		return ;
+	if (i > sizes[id])
+		exit(-1);
+	if ((sizes[id] - i) > (sizes[id] / 2) + 1)
+		go_low(stacks, sizes, i, id);
+	else
+		go_high(stacks, sizes, i, id);
 }

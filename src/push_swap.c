@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 17:22:08 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:56:31 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,7 @@ int	main(int argc, char **argv)
 		radix_sort(s, sizes);
 }
 
-static int	find_first_nonzero_index(int s[3][MAX_STACK], int id)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAX_STACK)
-	{
-		if (s[id][i] != 0)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-void	radix_sort(int s[3][MAX_STACK], int sizes[3])
+void	radix_sort(int s[3][MAX_STACK], int szs[3])
 {
 	int	b;
 	int	nb;
@@ -52,16 +38,16 @@ void	radix_sort(int s[3][MAX_STACK], int sizes[3])
 	int	g;
 
 	g = 0;
-	nb = get_biggest(s, sizes, 0);
+	nb = get_biggest(s, szs, 0);
 	b = count_bits(nb);
 	while (b)
 	{
-		split_stack_by_bit(s, sizes, b, g);
-		nb = find_first_nonzero_index(s, 2);
-		i = get_index(s[0], sizes[0], nb);
+		split_stack_by_bit(s, szs, b, g);
+		nb = get_first_nonzero_index(s, 2);
+		i = get_index(s[0], szs[0], nb);
 		if (nb != -1)
-			move_to_top(s, sizes, i, 0);
-		push_all(s, sizes, 1);
+			move_to_top(s, szs, i, 0);
+		push_all(s, szs, 1);
 		if (g)
 		{
 			g = 0;
@@ -70,7 +56,7 @@ void	radix_sort(int s[3][MAX_STACK], int sizes[3])
 		else
 			g = 1;
 	}
-	move_to_top(s, sizes, get_index(s[0], sizes[0], get_smallest(s, sizes, 0)), 0);
+	move_to_top(s, szs, get_index(s[0], szs[0], get_smallest(s, szs, 0)), 0);
 }
 
 static int	find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g)
@@ -102,11 +88,12 @@ static int	find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g)
 void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g)
 {
 	int	i;
-	
+
 	if (is_sequenced(s, sizes, 0) && sizes[1] == 0)
 	{
 		if (!is_sort(s, sizes, 0) && sizes[1] == 0)
-			move_to_top(s, sizes, get_index(s[0], sizes[0], get_smallest(s, sizes, 0)), 0);
+			move_to_top(s, sizes, get_index(s[0], sizes[0],
+					get_smallest(s, sizes, 0)), 0);
 		exit(1);
 	}
 	i = find_number_to_push(s, sizes, b, g);
