@@ -6,12 +6,34 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 17:56:31 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:16:50 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
+
+static void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g)
+{
+	int	i;
+
+	if (is_sequenced(s, sizes, 0) && sizes[1] == 0)
+	{
+		if (!is_sort(s, sizes, 0) && sizes[1] == 0)
+			move_to_top(s, sizes, get_index(s[0], sizes[0],
+					get_smallest(s, sizes, 0)), 0);
+		exit(1);
+	}
+	i = find_number_to_push(s, sizes, b, g);
+	while (i != -1)
+	{
+		move_to_top(s, sizes, i, 0);
+		if (is_sort(s, sizes, 0) && sizes[1] == 0)
+			exit(1);
+		select_cmd(s, sizes, "pb", 1);
+		i = find_number_to_push(s, sizes, b, g);
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -24,7 +46,7 @@ int	main(int argc, char **argv)
 	rank_stack(s, sizes, 0);
 	if (sizes[0] == 3)
 		micro_sort(s, sizes);
-	else if (sizes[0] < 6)
+	if (sizes[0] < 6)
 		mini_sort(s, sizes);
 	else
 		radix_sort(s, sizes);
@@ -59,54 +81,6 @@ void	radix_sort(int s[3][MAX_STACK], int szs[3])
 	move_to_top(s, szs, get_index(s[0], szs[0], get_smallest(s, szs, 0)), 0);
 }
 
-static int	find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g)
-{
-	int	orig_size;
-	int	nb;
-	int	m;
-
-	orig_size = sizes[0];
-	m = get_radix_median(b);
-	while (orig_size)
-	{
-		nb = s[0][orig_size - 1];
-		if (g == 1)
-		{
-			if (test_bit(nb, b) && s[2][nb] < 1 && (nb <= m || m <= 100))
-				return (orig_size - 1);
-		}
-		else
-		{
-			if (test_bit(nb, b) && s[2][nb] < 1 && (nb > m || m <= 100))
-				return (orig_size - 1);
-		}
-		orig_size--;
-	}
-	return (-1);
-}
-
-void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g)
-{
-	int	i;
-
-	if (is_sequenced(s, sizes, 0) && sizes[1] == 0)
-	{
-		if (!is_sort(s, sizes, 0) && sizes[1] == 0)
-			move_to_top(s, sizes, get_index(s[0], sizes[0],
-					get_smallest(s, sizes, 0)), 0);
-		exit(1);
-	}
-	i = find_number_to_push(s, sizes, b, g);
-	while (i != -1)
-	{
-		move_to_top(s, sizes, i, 0);
-		if (is_sort(s, sizes, 0) && sizes[1] == 0)
-			exit(1);
-		select_cmd(s, sizes, "pb", 1);
-		i = find_number_to_push(s, sizes, b, g);
-	}
-}
-
 void	mini_sort(int stacks[3][MAX_STACK], int stack_sizes[3])
 {
 	while (!is_sequenced(stacks, stack_sizes, 0))
@@ -115,4 +89,29 @@ void	mini_sort(int stacks[3][MAX_STACK], int stack_sizes[3])
 		select_cmd(stacks, stack_sizes, "ra", 1);
 	while (stack_sizes[1] > 0)
 		select_cmd(stacks, stack_sizes, "pa", 1);
+}
+
+void	micro_sort(int s[3][MAX_STACK], int sizes[3])
+{
+	if (!is_sort(s, sizes, 0))
+	{
+		if (is_sequenced(s, sizes, 0))
+		{
+			while (!is_sort(s, sizes, 0))
+				select_cmd(s, sizes, "ra", 1);
+		}
+		else if (s[0][0] == 2 && s[0][1] == 3)
+		{
+			select_cmd(s, sizes, "pb", 1);
+			select_cmd(s, sizes, "rra", 1);
+			select_cmd(s, sizes, "pa", 1);
+		}
+		else if (s[0][2] == 3 && s[0][1] == 2)
+		{
+			select_cmd(s, sizes, "sa", 1);
+			select_cmd(s, sizes, "rra", 1);
+		}
+		else
+			select_cmd(s, sizes, "rra", 1);
+	}
 }

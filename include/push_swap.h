@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 18:04:40 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:17:37 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 # include <unistd.h>
 # include <stdio.h>
 
+// Analysis
+int		find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g);
+int		is_sort(int s[3][MAX_STACK], int s_sizes[3], int id);
+int		is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
+int		count_bits(int n);
+int		count_smaller_numbers(int s[MAX_STACK], int stack_size, int nb);
+
 // Preparation
 void	rev_stack(int s[MAX_STACK], int s_size);
 void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
@@ -31,20 +38,13 @@ void	rank_stack(int stacks[3][MAX_STACK], int stack_sizes[3], int s_id);
 int		check_stacks(int stacks[2][MAX_STACK], int stack_sizes[3]);
 
 // Sorter
-void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g);
 void	radix_sort(int stacks[3][MAX_STACK], int s_sizes[3]);
-int		is_sort(int s[3][MAX_STACK], int s_sizes[3], int id);
-int		is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id);
 void	micro_sort(int stacks[3][MAX_STACK], int stack_sizes[3]);
 void	mini_sort(int stacks[3][MAX_STACK], int stack_sizes[3]);
 
 // Utils
 void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int s_size);
 void	print_stacks(int s[3][MAX_STACK], int s_sizes[3]);
-int		count_smaller_numbers(int s[MAX_STACK], int stack_size, int nb);
-int		get_smallest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		get_biggest(int s[3][MAX_STACK], int s_sizes[3], int s_id);
-int		count_bits(int n);
 int		test_bit(int nb, int bit);
 void	clear_stack(int s[2][MAX_STACK], int s_sizes[3], int s_id);
 void	exit_program(int error, char *msg);

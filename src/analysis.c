@@ -6,36 +6,37 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:24 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 18:03:59 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:12:47 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
 
-void	micro_sort(int s[3][MAX_STACK], int sizes[3])
+int	find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g)
 {
-	if (!is_sort(s, sizes, 0))
+	int	orig_size;
+	int	nb;
+	int	m;
+
+	orig_size = sizes[0];
+	m = get_radix_median(b);
+	while (orig_size)
 	{
-		if (is_sequenced(s, sizes, 0))
+		nb = s[0][orig_size - 1];
+		if (g == 1)
 		{
-			while (!is_sort(s, sizes, 0))
-				select_cmd(s, sizes, "ra", 1);
-		}
-		else if (s[0][0] == 2 && s[0][1] == 3)
-		{
-			select_cmd(s, sizes, "pb", 1);
-			select_cmd(s, sizes, "rra", 1);
-			select_cmd(s, sizes, "pa", 1);
-		}
-		else if (s[0][2] == 3 && s[0][1] == 2)
-		{
-			select_cmd(s, sizes, "sa", 1);
-			select_cmd(s, sizes, "rra", 1);
+			if (test_bit(nb, b) && s[2][nb] < 1 && (nb <= m || m <= 100))
+				return (orig_size - 1);
 		}
 		else
-			select_cmd(s, sizes, "rra", 1);
+		{
+			if (test_bit(nb, b) && s[2][nb] < 1 && (nb > m || m <= 100))
+				return (orig_size - 1);
+		}
+		orig_size--;
 	}
+	return (-1);
 }
 
 int	is_sequenced(int s[3][MAX_STACK], int sizes[3], int id)
