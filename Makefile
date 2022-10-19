@@ -1,5 +1,6 @@
 #Variables
 
+NAME					= checker push_swap
 CHECKER					= checker
 PUSHSWAP				= push_swap
 INCLUDE					= -I include
@@ -36,7 +37,9 @@ CHECKER_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(CHECKER_SRC_FILES)))
 PUSHSWAP_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(PUSHSWAP_SRC_FILES)))
 TEST 			= 	$(addprefix $(TEST_DIR), $(addsuffix .test.c, $(TEST_FILES)))
 
-all:			$(CHECKER) $(PUSHSWAP)
+all:			$(NAME)
+
+$(NAME):		$(CHECKER) $(PUSHSWAP)
 
 memory_test:	$(PUSHSWAP_OBJ) $(CHECKER_OBJ)
 				@make -C $(LIBFT)
