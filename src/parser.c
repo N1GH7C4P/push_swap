@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 18:38:25 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:40:10 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ static int	check_argument(char *input)
 int	parser(int argc, char **argv, int stacks[3][MAX_STACK], int sizes[2])
 {
 	if (argc > MAX_ARGS - 1)
-		exit_program(-1, "Too many arguments.");
+		exit_program(-1, "Wrong number of arguments.");
 	if (argc == 2)
 		sizes[0] = parse_input_string(argv[1], stacks[0]);
 	else
 		sizes[0] = parse_arguments(argv, stacks[0], argc - 1, 1);
+	rev_stack(stacks[0], sizes[0]);
 	return (0);
 }
 
@@ -57,25 +58,24 @@ int	parse_arguments(char **argv, int stack[MAX_STACK], int size, int skip_first)
 {
 	int	i;
 	int	index;
-	int nb;
+	int	zero;
 
 	i = 0;
+	zero = 0;
 	if (skip_first == 1)
 		i++;
 	while (argv[i])
 	{
-		if (check_argument(argv[i]) == -1)
-			exit_program(-1, "Invalid argument!");
+		check_argument(argv[i]);
+		index = -1;
+		if (ft_atoi(argv[i]) == 0)
+			zero++;
 		else
-		{
-			nb = ft_atoi(argv[i]);
-			index = get_index(stack, size, nb);
-			if (index != -1)
-				exit_program(-1, "Duplicate value!");
-			stack[i - skip_first] = nb;
-		}
+			index = get_index(stack, size, ft_atoi(argv[i]));
+		if (index != -1 || zero > 1)
+			exit_program(-1, "Duplicate values.");
+		stack[i - skip_first] = ft_atoi(argv[i]);
 		i++;
 	}
-	rev_stack(stack, size);
 	return (size);
 }

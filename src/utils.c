@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:59:11 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 16:39:00 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:11:43 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	print_stacks(int stacks[2][MAX_STACK], int stack_sizes[3])
 
 void	exit_program(int ret, char *msg)
 {
-	if (msg)
+	if (msg && DESCRIPTIVE_MESSAGES == 1)
 		ft_putendl(msg);
+	else if (ret == -1)
+		ft_putendl("Error");
 	exit(ret);
 }
 

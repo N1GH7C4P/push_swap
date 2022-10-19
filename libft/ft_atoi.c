@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 09:00:44 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/09/30 14:47:53 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:19:14 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static long	ft_calculate_output(char *str, int sign, int i)
 		nb = nb * 10 + str[i] - '0';
 		if (nb > INT_MAX && sign > 0)
 		{
-			ft_putendl("Too large number for atoi!");
+			ft_putendl("Error");
 			exit(-1);
 		}
 		if (-nb < INT_MIN && sign < 0)
 		{
-			ft_putendl("Too small number for atoi!");
+			ft_putendl("Error");
 			exit(-1);
 		}
 		i++;

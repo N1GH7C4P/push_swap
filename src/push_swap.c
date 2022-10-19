@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 18:37:19 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:22:08 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 	rank_stack(s, sizes, 0);
 	if (sizes[0] == 3)
 		micro_sort(s, sizes);
+	else if (sizes[0] < 6)
+		mini_sort(s, sizes);
 	else
 		radix_sort(s, sizes);
 }
@@ -101,9 +103,9 @@ void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g)
 {
 	int	i;
 	
-	if (is_sequenced(s, sizes, 0))
+	if (is_sequenced(s, sizes, 0) && sizes[1] == 0)
 	{
-		if (!is_sort(s, sizes, 0))
+		if (!is_sort(s, sizes, 0) && sizes[1] == 0)
 			move_to_top(s, sizes, get_index(s[0], sizes[0], get_smallest(s, sizes, 0)), 0);
 		exit(1);
 	}
@@ -111,9 +113,19 @@ void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g)
 	while (i != -1)
 	{
 		move_to_top(s, sizes, i, 0);
-		if (is_sort(s, sizes, 0))
+		if (is_sort(s, sizes, 0) && sizes[1] == 0)
 			exit(1);
-		run_cmd(s, sizes, "pb", 1);
+		select_cmd(s, sizes, "pb", 1);
 		i = find_number_to_push(s, sizes, b, g);
 	}
+}
+
+void	mini_sort(int stacks[3][MAX_STACK], int stack_sizes[3])
+{
+	while (!is_sequenced(stacks, stack_sizes, 0))
+		push_smallest_nb(stacks, stack_sizes, 0);
+	while (!is_sort(stacks, stack_sizes, 0))
+		select_cmd(stacks, stack_sizes, "ra", 1);
+	while (stack_sizes[1] > 0)
+		select_cmd(stacks, stack_sizes, "pa", 1);
 }

@@ -6,40 +6,12 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:37 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 14:37:21 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:41:53 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
-
-void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l, int v)
-{
-	if (v)
-		ft_putendl(l);
-	if (!ft_strcmp(l, "sa"))
-		swap_top(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(l, "sb"))
-		swap_top(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(l, "ss"))
-		swap_both(stacks, stack_sizes);
-	else if (!ft_strcmp(l, "pa"))
-		push_swap(stacks, stack_sizes, 1);
-	else if (!ft_strcmp(l, "pb"))
-		push_swap(stacks, stack_sizes, 2);
-	else if (!ft_strcmp(l, "ra"))
-		rotate(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(l, "rb"))
-		rotate(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(l, "rr"))
-		rotate_both(stacks, stack_sizes);
-	else if (!ft_strcmp(l, "rra"))
-		rev_rotate(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(l, "rrb"))
-		rev_rotate(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(l, "rrr"))
-		rev_rotate_both(stacks, stack_sizes);
-}
 
 // pa & pb
 // push <dest> - take top of <src> and put it at the top of <dest>.

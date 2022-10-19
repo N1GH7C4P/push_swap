@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:24 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 18:34:54 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:21:37 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,21 @@ void	micro_sort(int stacks[3][MAX_STACK], int stack_sizes[3])
 		if (is_sequenced(stacks, stack_sizes, 0))
 		{
 			while (!is_sort(stacks, stack_sizes, 0))
-				run_cmd(stacks, stack_sizes, "ra", 1);
+				select_cmd(stacks, stack_sizes, "ra", 1);
 		}
 		else if (stacks[0][0] == 2 && stacks[0][1] == 3)
 		{
-			run_cmd(stacks, stack_sizes, "pb", 1);
-			run_cmd(stacks, stack_sizes, "rra", 1);
-			run_cmd(stacks, stack_sizes, "pa", 1);
+			select_cmd(stacks, stack_sizes, "pb", 1);
+			select_cmd(stacks, stack_sizes, "rra", 1);
+			select_cmd(stacks, stack_sizes, "pa", 1);
+		}
+		else if (stacks[0][2] == 3 && stacks[0][1] == 2)
+		{
+			select_cmd(stacks, stack_sizes, "sa", 1);
+			select_cmd(stacks, stack_sizes, "rra", 1);
 		}
 		else
-			run_cmd(stacks, stack_sizes, "rra", 1);
+			select_cmd(stacks, stack_sizes, "rra", 1);
 	}
 }
 
@@ -38,8 +43,6 @@ int is_sequenced(int stacks[3][MAX_STACK], int stack_sizes[3], int id)
 	int	index;
 	int	i;
 
-	if (stack_sizes[1] > 0)
-		return (0);
 	index = get_index(stacks[0], stack_sizes[0], get_biggest(stacks, stack_sizes, id));
 	i = 0;
 	while (i < stack_sizes[id] - 2)
@@ -65,8 +68,6 @@ int	is_sort(int stacks[3][MAX_STACK], int stack_sizes[3], int id)
 
 	top_limiter = stack_sizes[id] - 1;
 	i = 0;
-	if (stack_sizes[1] > 0)
-		return (0);
 	while (i < top_limiter)
 	{
 		if (stacks[id][i] != (stacks[id][i + 1] + 1))

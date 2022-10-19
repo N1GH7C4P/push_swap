@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:30:01 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/17 18:36:19 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:30:09 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static void	go_high(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
 			biggest = get_biggest(stacks, sizes, 1);
 			index = get_index(stacks[1], sizes[1], biggest);
 			if ((sizes[1] - index) <= (sizes[1] / 2))
-				run_cmd(stacks, sizes, "rr", 1);
+				select_cmd(stacks, sizes, "rr", 1);
 			else
-				run_cmd(stacks, sizes, "ra", 1);
+				select_cmd(stacks, sizes, "ra", 1);
 		}
 		else
-			run_cmd(stacks, sizes, "rb", 1);
+			select_cmd(stacks, sizes, "rb", 1);
 		i++;
 	}
 }
@@ -47,12 +47,12 @@ static void	go_low(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
 			biggest = get_biggest(stacks, sizes, 1);
 			index = get_index(stacks[1], sizes[1], biggest);
 			if ((sizes[1] - index) > (sizes[1] / 2))
-				run_cmd(stacks, sizes, "rrr", 1);
+				select_cmd(stacks, sizes, "rrr", 1);
 			else
-				run_cmd(stacks, sizes, "rra", 1);
+				select_cmd(stacks, sizes, "rra", 1);
 		}
 		else
-			run_cmd(stacks, sizes, "rrb", 1);
+			select_cmd(stacks, sizes, "rrb", 1);
 		if (i == 0)
 			i = sizes[id] - 1;
 		else
@@ -66,10 +66,29 @@ void	move_to_top(int stacks[3][MAX_STACK], int sizes[3], int i, int id)
 		return ;
 	if (i > sizes[id])
 		exit(-1);
-	if ((sizes[id] - i) > (sizes[id] / 2))
+	if ((sizes[id] - i) > (sizes[id] / 2) + 1)
 		go_low(stacks, sizes, i, id);
 	else
 		go_high(stacks, sizes, i, id);
+}
+
+int		push_smallest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
+{
+	int	i;
+	int	nb;
+
+	nb = get_smallest(stacks, sizes, id);
+	i = get_index(stacks[id], sizes[id], nb);
+	if (i != -1)
+	{
+		move_to_top(stacks, sizes, i, id);
+		if (id == 1)
+			select_cmd(stacks, sizes, "pa", 1);
+		else
+			select_cmd(stacks, sizes, "pb", 1);
+		return (nb);
+	}
+	return (-1);
 }
 
 int		push_biggest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
@@ -83,9 +102,9 @@ int		push_biggest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
 	{
 		move_to_top(stacks, sizes, i, id);
 		if (id == 1)
-			run_cmd(stacks, sizes, "pa", 1);
+			select_cmd(stacks, sizes, "pa", 1);
 		else
-			run_cmd(stacks, sizes, "pb", 1);
+			select_cmd(stacks, sizes, "pb", 1);
 		return (nb);
 	}
 	return (-1);
