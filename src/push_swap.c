@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 19:28:49 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:33:42 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	static int	s[3][MAX_STACK];
 	static int	sizes[3];
 
-	if (argc < 2)
+	if (argc < 2 || argc > MAX_ARGS + 1)
 		exit_program(0, NULL);
 	parser(argc, argv, s, sizes);
 	rank_stack(s, sizes, 0);

@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 18:17:37 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:34:32 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 # define PUSH_SWAP_H
 
 # define DESCRIPTIVE_MESSAGES 0
-# define MAX_ARGS 1000
-# define MAX_STACK 2000
+# define MAX_ARGS 2000
+# define MAX_STACK 4001
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
-# define VERBOSE 0
-# include <unistd.h>
-# include <stdio.h>
 
 // Analysis
 int		find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g);
