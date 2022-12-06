@@ -34,12 +34,12 @@ PUSHSWAP_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(PUSHSWAP_SRC_FILES)))
 
 all:			$(NAME)
 
-$(CHECKER):		$(CHECKER_OBJ)
+$(CHECKER):		$(CHECKER_SRC)
 				@make -C $(LIBFT)
 				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
 				@echo "$(GREEN)checker compiled!$(DEF_COLOR)"
 
-$(PUSHSWAP):	$(PUSHSWAP_OBJ)
+$(PUSHSWAP):	$(PUSHSWAP_SRC)
 				@make -C $(LIBFT)
 				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(PUSHSWAP_SRC) -o $(PUSHSWAP)
 				@echo "$(GREEN)push_swap compiled!$(DEF_COLOR)"
