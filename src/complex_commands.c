@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:30:01 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 18:01:30 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:38:28 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
 
 int	push_smallest_nb(int stacks[3][MAX_STACK], int sizes[3], int id)
 {

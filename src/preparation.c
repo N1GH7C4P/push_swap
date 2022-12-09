@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:22:53 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 17:58:47 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:38:47 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
 
 void	copy_stack(int src[MAX_STACK], int dest[MAX_STACK], int stack_size)
 {

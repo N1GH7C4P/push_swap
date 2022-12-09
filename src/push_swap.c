@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:05:00 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/20 14:33:42 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:38:51 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
 
 static void	split_stack_by_bit(int s[3][MAX_STACK], int sizes[3], int b, int g)
 {

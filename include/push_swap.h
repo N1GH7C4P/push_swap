@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/12/09 14:26:19 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:39:17 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define MAX_STACK 4001
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
+
+# include "../libft/libft.h"
 
 // Analysis
 int		find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g);

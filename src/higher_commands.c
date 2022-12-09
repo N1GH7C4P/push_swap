@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:58:39 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/06 14:44:27 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:38:40 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
 
 void	swap_both(int stacks[3][MAX_STACK], int stack_sizes[3])
 {

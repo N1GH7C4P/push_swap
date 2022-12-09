@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:49:02 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 17:48:29 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:38:31 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
 
 int	get_index(int s[MAX_STACK], int s_size, int nb)
 {

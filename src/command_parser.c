@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:53:39 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/12/09 16:18:06 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:38:21 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
 
 int	select_cmd(int s[3][MAX_STACK], int sizes[3], char *l, int v)
 {

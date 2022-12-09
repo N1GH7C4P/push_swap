@@ -6,12 +6,11 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:24 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 18:12:47 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:38:00 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
 
 int	find_number_to_push(int s[3][MAX_STACK], int sizes[3], int b, int g)
 {
