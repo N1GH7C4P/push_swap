@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/12/09 16:30:44 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 17:32:06 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_argument(char *input)
 
 	i = 0;
 	if ((!ft_strcmp(input, "-") && !ft_strcmp(input, "+"))
-		|| ft_strequ(input, ""))
+		|| ft_strlen(input) < 1)
 		exit_program(-1, "Invalid digit.");
 	if (input[i] == '-' || input[i] == '+')
 		i++;
@@ -34,7 +34,7 @@ static int	check_argument(char *input)
 
 int	parser(int argc, char **argv, int stacks[3][MAX_STACK], int sizes[2])
 {
-	if (argc > MAX_ARGS + 1)
+	if (argc >= MAX_ARGS)
 		exit_program(-1, "Wrong number of arguments.");
 	if (argc == 2)
 		sizes[0] = parse_input_string(argv[1], stacks[0]);
