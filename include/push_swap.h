@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 14:38:26 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/20 14:34:32 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:26:19 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		parse_input_string(char *input, int s[MAX_STACK]);
 int		parse_arguments(char **argv, int s[MAX_STACK], int size, int skip);
 
 // Command handling
-void	select_cmd(int s[3][MAX_STACK], int s_sizes[3], char *line, int v);
+int		select_cmd(int s[3][MAX_STACK], int s_sizes[3], char *line, int v);
 void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l);
 
 //  Swap commands

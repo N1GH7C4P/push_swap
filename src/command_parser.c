@@ -6,14 +6,14 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:53:39 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/19 19:15:37 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:42:02 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
 
-void	select_cmd(int s[3][MAX_STACK], int sizes[3], char *l, int v)
+int	select_cmd(int s[3][MAX_STACK], int sizes[3], char *l, int v)
 {
 	if (!ft_strcmp(l, "sa") || !ft_strcmp(l, "sb") || !ft_strcmp(l, "ss")
 		|| !ft_strcmp(l, "pa") || !ft_strcmp(l, "pb") || !ft_strcmp(l, "ra")
@@ -23,10 +23,10 @@ void	select_cmd(int s[3][MAX_STACK], int sizes[3], char *l, int v)
 		if (v)
 			ft_putendl(l);
 		run_cmd(s, sizes, l);
-		return ;
+		return (1);
 	}
 	else
-		exit_program(-1, "Error");
+		return (-1);
 }
 
 void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l)

@@ -3,11 +3,10 @@
 NAME					= checker push_swap
 CHECKER					= checker
 PUSHSWAP				= push_swap
-INCLUDE					= -I include
-LIBFT_LIB				= -L ./libft -lft
-LIBFT					= libft
+INCLUDE					= -I ./include
+LIBFT_DIR				= ./libft
+LIBFT					= -L ./libft -lft
 SRC_DIR					= src/
-OBJ_DIR					= src/
 CC						= gcc
 CFLAGS					= -Wall -Werror -Wextra -O3
 RM						= rm -f
@@ -24,24 +23,30 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-CHECKER_SRC_FILES	= checker utils commands parser higher_commands preparation getters analysis command_parser
-PUSHSWAP_SRC_FILES	= push_swap parser utils commands higher_commands preparation complex_commands getters analysis command_parser
+CHECKER_SRC		=	checker utils commands parser higher_commands \
+					preparation getters analysis command_parser
 
-CHECKER_SRC 	= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(CHECKER_SRC_FILES)))
-PUSHSWAP_SRC 	= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(PUSHSWAP_SRC_FILES)))
-CHECKER_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(CHECKER_SRC_FILES)))
-PUSHSWAP_OBJ 	= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(PUSHSWAP_SRC_FILES)))
+PUSHSWAP_SRC	=	push_swap parser utils commands higher_commands \
+					preparation complex_commands getters analysis \
+					command_parser
+
+CHECKER_PATH	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(CHECKER_SRC)))
+PUSHSWAP_PATH	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(PUSHSWAP_SRC)))
+CHECKER_OBJ 	=	$(addsuffix .o, $(CHECKER_SRC))
+PUSHSWAP_OBJ	=	$(addsuffix .o, $(PUSHSWAP_SRC))
 
 all:			$(NAME)
 
-$(CHECKER):		$(CHECKER_SRC)
-				@make -C $(LIBFT)
-				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(CHECKER_SRC) -o $(CHECKER)
+$(CHECKER):
+				@make -C $(LIBFT_DIR)
+				${CC} $(CFLAGS) -c $(CHECKER_PATH) $(INCLUDE)
+				${CC} -o $(CHECKER) $(CHECKER_OBJ) $(LIBFT)
 				@echo "$(GREEN)checker compiled!$(DEF_COLOR)"
 
-$(PUSHSWAP):	$(PUSHSWAP_SRC)
-				@make -C $(LIBFT)
-				${CC} $(CFLAGS) $(INCLUDE) $(LIBFT_LIB) $(PUSHSWAP_SRC) -o $(PUSHSWAP)
+$(PUSHSWAP):
+				@make -C $(LIBFT_DIR)
+				${CC} $(CFLAGS) -c $(PUSHSWAP_PATH) $(INCLUDE)
+				${CC} -o $(PUSHSWAP) $(PUSHSWAP_OBJ) $(LIBFT)
 				@echo "$(GREEN)push_swap compiled!$(DEF_COLOR)"
 
 clean:
@@ -49,7 +54,7 @@ clean:
 				@echo "$(BLUE) push_swap object files cleaned!$(DEF_COLOR)"
 				@$(RM) -rf $(CHECKER_OBJ)
 				@echo "$(BLUE) checker object files cleaned!$(DEF_COLOR)"
-				@make clean -C $(LIBFT)
+				@make clean -C $(LIBFT_DIR)
 				@echo "$(BLUE)libft object files cleaned!$(DEF_COLOR)"
 
 fclean:			clean
@@ -57,7 +62,7 @@ fclean:			clean
 				@echo "$(CYAN)checker binary files cleaned!$(DEF_COLOR)"
 				@$(RM) -f $(PUSHSWAP)
 				@echo "$(CYAN)push_swap binary files cleaned!$(DEF_COLOR)"
-				@make fclean -C $(LIBFT)
+				@make fclean -C $(LIBFT_DIR)
 				@echo "$(CYAN)libft binary files cleaned!$(DEF_COLOR)"
 
 re:				fclean all

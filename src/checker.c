@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:07:19 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/20 14:33:27 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 14:39:51 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,18 @@ int	main(int argc, char **argv)
 	rank_stack(stacks, stack_sizes, 0);
 	line = NULL;
 	ret = ft_get_next_line(0, &line);
-	while (ret == 1 && ft_strcmp(line, "") && ft_strcmp(line, "\n"))
+	while (ret == 1)
 	{
-		select_cmd(stacks, stack_sizes, line, 0);
+		stacks[2][MAX_STACK - 1] = select_cmd(stacks, stack_sizes, line, 0);
+		free(line);
 		ret = ft_get_next_line(0, &line);
 	}
+	if (stacks[2][MAX_STACK - 1] == -1)
+		exit_program(-1, "Error");
 	if (check_stacks(stacks, stack_sizes) != 1)
 		ft_putendl("KO");
 	else
 		ft_putendl("OK");
-	free(line);
 	exit_program(0, NULL);
 }
 
