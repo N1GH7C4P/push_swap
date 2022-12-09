@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:52:35 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/10/20 14:33:03 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:30:44 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ static int	check_argument(char *input)
 	size_t	i;
 
 	i = 0;
-	if (!ft_strcmp(input, "-"))
+	if ((!ft_strcmp(input, "-") && !ft_strcmp(input, "+"))
+		|| ft_strequ(input, ""))
 		exit_program(-1, "Invalid digit.");
-	if (input[i] == '-')
+	if (input[i] == '-' || input[i] == '+')
 		i++;
 	while (input[i])
 	{

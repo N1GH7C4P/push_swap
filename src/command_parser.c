@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:53:39 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/12/09 14:42:02 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:18:06 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	select_cmd(int s[3][MAX_STACK], int sizes[3], char *l, int v)
 {
-	if (!ft_strcmp(l, "sa") || !ft_strcmp(l, "sb") || !ft_strcmp(l, "ss")
-		|| !ft_strcmp(l, "pa") || !ft_strcmp(l, "pb") || !ft_strcmp(l, "ra")
-		|| !ft_strcmp(l, "rb") || !ft_strcmp(l, "rr") || !ft_strcmp(l, "rra")
-		|| !ft_strcmp(l, "rrb") || !ft_strcmp(l, "rrr"))
+	if (ft_strequ(l, "sa") || ft_strequ(l, "sb") || ft_strequ(l, "ss")
+		|| ft_strequ(l, "pa") || ft_strequ(l, "pb") || ft_strequ(l, "ra")
+		|| ft_strequ(l, "rb") || ft_strequ(l, "rr") || ft_strequ(l, "rra")
+		|| ft_strequ(l, "rrb") || ft_strequ(l, "rrr"))
 	{
 		if (v)
 			ft_putendl(l);
@@ -31,27 +31,27 @@ int	select_cmd(int s[3][MAX_STACK], int sizes[3], char *l, int v)
 
 void	run_cmd(int stacks[3][MAX_STACK], int stack_sizes[3], char *l)
 {
-	if (!ft_strcmp(l, "sa"))
+	if (ft_strequ(l, "sa"))
 		swap_top(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(l, "sb"))
+	else if (ft_strequ(l, "sb"))
 		swap_top(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(l, "ss"))
+	else if (ft_strequ(l, "ss"))
 		swap_both(stacks, stack_sizes);
-	else if (!ft_strcmp(l, "pa"))
+	else if (ft_strequ(l, "pa"))
 		push_swap(stacks, stack_sizes, 1);
-	else if (!ft_strcmp(l, "pb"))
+	else if (ft_strequ(l, "pb"))
 		push_swap(stacks, stack_sizes, 2);
-	else if (!ft_strcmp(l, "ra"))
+	else if (ft_strequ(l, "ra"))
 		rotate(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(l, "rb"))
+	else if (ft_strequ(l, "rb"))
 		rotate(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(l, "rr"))
+	else if (ft_strequ(l, "rr"))
 		rotate_both(stacks, stack_sizes);
-	else if (!ft_strcmp(l, "rra"))
+	else if (ft_strequ(l, "rra"))
 		rev_rotate(stacks[0], stack_sizes[0]);
-	else if (!ft_strcmp(l, "rrb"))
+	else if (ft_strequ(l, "rrb"))
 		rev_rotate(stacks[1], stack_sizes[1]);
-	else if (!ft_strcmp(l, "rrr"))
+	else if (ft_strequ(l, "rrr"))
 		rev_rotate_both(stacks, stack_sizes);
 }
 
